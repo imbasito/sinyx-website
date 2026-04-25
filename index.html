@@ -455,8 +455,29 @@
                 return "";
             }
 
-            const hasScheme = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(trimmed);
-            return hasScheme ? trimmed : `https://${trimmed}`;
+            if (/^https?:\/\//i.test(trimmed)) {
+                return trimmed;
+            }
+
+            if (/^\/\//.test(trimmed)) {
+                return `https:${trimmed}`;
+            }
+
+            if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(trimmed)) {
+                return trimmed;
+            }
+
+            const hostWithPortPattern = /^(?:\[[0-9a-fA-F:]+\]|localhost|\d{1,3}(?:\.\d{1,3}){3}|[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+):\d{1,5}(?:[/?#]|$)/;
+            if (hostWithPortPattern.test(trimmed)) {
+                return `https://${trimmed}`;
+            }
+
+            const hasSchemeWithoutSlashes = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(trimmed);
+            if (hasSchemeWithoutSlashes) {
+                return trimmed;
+            }
+
+            return `https://${trimmed}`;
         }
 
         document.getElementById('demo-btn').addEventListener('click', async () => {

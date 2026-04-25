@@ -229,6 +229,25 @@
       .string { color: #a7f3d0; }
       .method { color: var(--accent-blue); }
 
+      /* Demo Section */
+      .demo-section {
+        max-width: 900px; margin: 0 auto 8rem; padding: 0 2rem; text-align: center;
+      }
+      .demo-box {
+        background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(20px);
+        padding: 3rem; border-radius: 24px; border: 1px solid var(--card-border);
+      }
+      .demo-input-group { display: flex; gap: 1rem; margin-bottom: 2rem; }
+      .demo-input-group input {
+        flex: 1; padding: 1rem 1.5rem; border-radius: 50px; border: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.05); color: #fff; font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem; outline: none; transition: border-color 0.3s;
+      }
+      .demo-input-group input:focus { border-color: var(--accent-purple); }
+      .demo-btn { white-space: nowrap; cursor: pointer; border: none; }
+      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } }
+      .cf-turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 1rem; }
+
       /* Footer */
       footer {
         border-top: 1px solid var(--card-border);
@@ -305,7 +324,30 @@
             </div>
         </section>
 
-        <section id="features" class="features">
+        <!-- Interactive Playground -->
+        <section id="demo" class="demo-section">
+            <span class="section-label">Interactive Playground</span>
+            <h2>Try it instantly.</h2>
+            <div class="demo-box">
+                <div class="demo-input-group">
+                    <input type="url" id="demo-url" placeholder="Paste any article URL..." required>
+                    <button class="btn btn-primary demo-btn" id="demo-btn">Extract Markdown</button>
+                </div>
+                
+                <div class="cf-turnstile-wrapper">
+                    <!-- Cloudflare's always-pass testing sitekey: 1x00000000000000000000AA -->
+                    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="onTurnstileSuccess"></div>
+                </div>
+                <input type="hidden" id="demo-token" value="dummy-token">
+
+                <div class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:400px; overflow-y:auto;">
+                    <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                    <pre><code id="demo-output" style="color: #a7f3d0;">awaiting url...</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
             <div class="feature-card">
                 <h3>🛡️ SSRF Protected</h3>
                 <p>Built for production. We automatically block internal network requests and localhost lookups, shielding your infrastructure from Server-Side Request Forgery.</p>
@@ -366,7 +408,8 @@
 
         <div class="code-window">
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">curl</span> <span class="keyword">-X</span> <span class="method">POST</span> https://api.sinyx.me/v1/extract \
+            <pre><code><span class="keyword">curl</span> <span class="keyword">--request</span> <span class="method">POST</span> https://url-to-markdown2.p.rapidapi.com/v1/extract \
+  <span class="keyword">-H</span> <span class="string">"x-rapidapi-host: url-to-markdown2.p.rapidapi.com"</span> \
   <span class="keyword">-H</span> <span class="string">"x-rapidapi-key: YOUR_RAPIDAPI_KEY"</span> \
   <span class="keyword">-d</span> <span class="string">'{"url": "https://sinyx.me"}'</span></code></pre>
         </div>
@@ -398,5 +441,61 @@
             <p>&copy; 2026 Sinyx API. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+        // Store turnstile token locally when verified
+        function onTurnstileSuccess(token) {
+            document.getElementById('demo-token').value = token;
+        }
+
+        document.getElementById('demo-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('demo-btn');
+            const output = document.getElementById('demo-output');
+            const urlInput = document.getElementById('demo-url').value;
+            const token = document.getElementById('demo-token').value;
+
+            if (!urlInput) {
+                alert("Please paste a URL first.");
+                return;
+            }
+            if (!token) {
+                alert("Please wait for the Cloudflare security check.");
+                return;
+            }
+
+            btn.innerText = "Extracting...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+            output.style.color = "#8b5cf6";
+            output.innerText = "Bypassing anti-bot...\nExtracting readable content...\nConverting to Markdown...\n\nProcessing...";
+
+            try {
+                // Testing locally on port 3000
+                const response = await fetch("http://localhost:3000/v1/demo", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: urlInput, turnstileToken: token })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    output.style.color = "#E2E8F0";
+                    output.innerText = data.markdown || data.content || JSON.stringify(data, null, 2);
+                } else {
+                    output.style.color = "#ff5f56";
+                    output.innerText = "Error: " + (data.error || "Extraction failed.");
+                }
+            } catch (err) {
+                output.style.color = "#ff5f56";
+                output.innerText = "Network Error: Could not connect to Sinyx API.";
+            } finally {
+                btn.innerText = "Extract Markdown";
+                btn.style.opacity = "1";
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>

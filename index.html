@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinyx - The Developer-First URL to Markdown API</title>
+    <meta name="description" content="Intelligently extract readable content from any web page and convert it into clean Markdown for AI and RAG pipelines.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-dark: #0A0A0A;
+        --text-main: #E2E8F0;
+        --accent-purple: #8b5cf6;
+        --accent-blue: #3b82f6;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --card-border: rgba(255, 255, 255, 0.08);
+      }
+      
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+      body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* Glow Effects */
+      .glow-bg {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(59,130,246,0.1) 40%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(60px);
+      }
+
+      header {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 1.5rem;
+        background: linear-gradient(90deg, #fff, #9ca3af);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .hero-content h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        letter-spacing: -1px;
+      }
+
+      .gradient-text {
+        background: linear-gradient(to right, var(--accent-purple), var(--accent-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-content p {
+        font-size: 1.25rem;
+        color: #9ca3af;
+        margin-bottom: 2.5rem;
+        font-weight: 300;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+        color: white;
+        box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.5);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 25px -10px rgba(139, 92, 246, 0.7);
+      }
+
+      .btn-secondary {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        color: white;
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .hero-visual {
+        position: relative;
+        perspective: 1000px;
+      }
+
+      .hero-visual img {
+        width: 100%;
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        transform: rotateY(-5deg) rotateX(5deg);
+        transition: transform 0.5s ease;
+      }
+
+      .hero-visual img:hover {
+        transform: rotateY(0) rotateX(0);
+      }
+
+      .features {
+        max-width: 1200px;
+        margin: 8rem auto;
+        padding: 0 2rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        padding: 2.5rem;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(139, 92, 246, 0.3);
+      }
+
+      .feature-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+
+      .feature-card p {
+        color: #9ca3af;
+        font-size: 0.95rem;
+      }
+
+      .code-section {
+        max-width: 800px;
+        margin: 0 auto 8rem auto;
+        padding: 0 2rem;
+      }
+
+      .code-window {
+        background: #1e1e1e;
+        border-radius: 12px;
+        border: 1px solid var(--card-border);
+        overflow: hidden;
+      }
+
+      .code-header {
+        background: #2a2a2a;
+        padding: 0.75rem 1rem;
+        display: flex;
+        gap: 6px;
+      }
+
+      .dot {
+        width: 12px; height: 12px; border-radius: 50%;
+      }
+      .dot.r { background: #ff5f56; }
+      .dot.y { background: #ffbd2e; }
+      .dot.g { background: #27c93f; }
+
+      pre {
+        padding: 2rem;
+        overflow-x: auto;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        color: #d4d4d4;
+      }
+
+      .code-keyword { color: #569cd6; }
+      .code-string { color: #ce9178; }
+      
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; text-align: center; }
+        .buttons { justify-content: center; }
+        .features { grid-template-columns: 1fr; }
+        .hero-visual img { transform: none; }
+      }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <header>
+        <div class="logo">SINYX API</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>LLMs choke on raw HTML. <br><span class="gradient-text">Feed them Markdown.</span></h1>
+                <p>The enterprise-grade URL-to-Markdown extraction engine. Bypass noise, secure your RAG pipelines with SSRF protection, and process URLs in concurrent batches.</p>
+                <div class="buttons">
+                    <!-- ADD YOUR RAPID API LINK BELOW -->
+                    <a href="https://rapidapi.com/ibasitkhan98/api/url-to-markdown2" target="_blank" class="btn btn-primary">Get API Key &rarr;</a>
+                    <a href="#" class="btn btn-secondary">View Postman Docs</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="SinyxHero.png" alt="Sinyx Terminal Transformation">
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>🛡️ SSRF Protected</h3>
+                <p>Built for production. We automatically block internal network requests and localhost lookups, shielding your infrastructure from Server-Side Request Forgery.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Graceful Batching</h3>
+                <p>Process up to 5 URLs concurrently. If one URL throws a 404, it doesn't fail the batch—your successful extractions are still delivered.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎯 Precision Targeting</h3>
+                <p>Need exactly one specific article section? Pass a CSS selector and Sinyx will extract only that block, ignoring the rest of the DOM.</p>
+            </div>
+        </section>
+
+        <section class="code-section">
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                </div>
+                <pre><code><span class="code-keyword">curl</span> --request POST \
+  --url https://api.sinyx.me/v1/extract \
+  --header <span class="code-string">'Content-Type: application/json'</span> \
+  --header <span class="code-string">'x-sinyx-origin-key: YOUR_API_KEY'</span> \
+  --data <span class="code-string">'{
+  "url": "https://en.wikipedia.org/wiki/API",
+  "format": "full",
+  "selector": "main"
+}'</span></code></pre>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

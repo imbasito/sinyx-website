@@ -340,9 +340,8 @@
                 
                 <div class="cf-turnstile-wrapper">
                     <!-- Cloudflare Turnstile -->
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID" data-callback="onTurnstileSuccess"></div>
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID"></div>
                 </div>
-                <input type="hidden" id="demo-token" value="">
 
                 <div class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:400px; overflow-y:auto;">
                     <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
@@ -449,16 +448,13 @@
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
-        // Store turnstile token locally when verified
-        function onTurnstileSuccess(token) {
-            document.getElementById('demo-token').value = token;
-        }
-
         document.getElementById('demo-btn').addEventListener('click', async () => {
             const btn = document.getElementById('demo-btn');
             const output = document.getElementById('demo-output');
             const urlInput = document.getElementById('demo-url').value;
-            const token = document.getElementById('demo-token').value;
+            
+            // Get the token using the official Cloudflare API (returns undefined if not ready)
+            const token = typeof turnstile !== "undefined" ? turnstile.getResponse() : undefined;
 
             if (!urlInput) {
                 alert("Please paste a URL first.");
@@ -503,7 +499,6 @@
                 // Tokens are single-use. We must reset the widget to generate a new token for the next request.
                 if (typeof turnstile !== "undefined") {
                     turnstile.reset();
-                    document.getElementById('demo-token').value = "";
                 }
             }
         });

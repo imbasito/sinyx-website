@@ -19,6 +19,10 @@
       
       * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
       
+      html {
+        scroll-padding-top: 100px; /* Prevents anchor links from hiding under fixed nav */
+      }
+
       body {
         font-family: 'Outfit', sans-serif;
         background-color: var(--bg-dark);
@@ -335,8 +339,8 @@
                 </div>
                 
                 <div class="cf-turnstile-wrapper">
-                    <!-- Cloudflare's always-pass testing sitekey: 1x00000000000000000000AA -->
-                    <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-callback="onTurnstileSuccess"></div>
+                    <!-- Cloudflare Turnstile -->
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID" data-callback="onTurnstileSuccess"></div>
                 </div>
                 <input type="hidden" id="demo-token" value="dummy-token">
 

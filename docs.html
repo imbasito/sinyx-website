@@ -16,6 +16,12 @@
         --card-border: rgba(255, 255, 255, 0.1);
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+      html {
+        scroll-padding-top: 100px;
+        scroll-behavior: smooth;
+      }
+      
       body {
         font-family: 'Outfit', sans-serif;
         background-color: var(--bg-dark);
@@ -98,9 +104,11 @@
                 <img src="URL_to_Markdown.png" alt="Sinyx Logo" height="32" style="margin-right: 12px; border-radius: 4px;">
                 SINYX API
             </a>
-            <div class="nav-links">
+            <div class="nav-links" style="display:flex; gap:2rem;">
+                <a href="index.html#features">Features</a>
                 <a href="index.html#pricing">Pricing</a>
-                <a href="mailto:ibasitkhan.98@gmail.com">Contact</a>
+                <a href="docs.html">Docs</a>
+                <a href="index.html#contact">Contact</a>
             </div>
         </div>
     </nav>

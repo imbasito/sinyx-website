@@ -197,14 +197,35 @@
       .code-window {
         max-width: 900px;
         margin: 0 auto 10rem auto;
-        background: #0F0F0F;
+        background: rgba(15, 15, 15, 0.8);
+        backdrop-filter: blur(20px);
         border-radius: 16px;
-        border: 1px solid var(--card-border);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
         overflow: hidden;
       }
-      .code-header { background: #1A1A1A; padding: 1rem; display: flex; gap: 8px; border-bottom: 1px solid var(--card-border); }
-      .dot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
-      pre { padding: 2.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #d4d4d4; }
+      .code-header { 
+        background: rgba(30, 30, 30, 0.9); 
+        padding: 1rem 1.5rem; 
+        display: flex; 
+        gap: 8px; 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+      }
+      .dot { width: 12px; height: 12px; border-radius: 50%; }
+      .dot.red { background: #ff5f56; }
+      .dot.yellow { background: #ffbd2e; }
+      .dot.green { background: #27c93f; }
+      pre { 
+        padding: 2.5rem; 
+        overflow-x: auto; 
+        font-family: 'JetBrains Mono', Consolas, monospace; 
+        font-size: 1.05rem; 
+        color: #e2e8f0; 
+        line-height: 1.7;
+      }
+      .keyword { color: var(--accent-purple); font-weight: 600; }
+      .string { color: #a7f3d0; }
+      .method { color: var(--accent-blue); }
 
       /* Footer */
       footer {
@@ -259,7 +280,7 @@
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#pricing">Pricing</a>
-                <a href="https://www.postman.com/bestboy717-5553701/url-to-markdown/collection/28zk2pf/url-to-markdown-api?sideView=agentMode" target="_blank">Docs</a>
+                <a href="docs.html">Docs</a>
                 <a href="#contact">Contact</a>
             </div>
         </div>
@@ -339,10 +360,10 @@
         </section>
 
         <div class="code-window">
-            <div class="code-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-            <pre><code>curl -X POST https://api.sinyx.me/v1/extract \
-  -H "x-sinyx-origin-key: YOUR_KEY" \
-  -d '{"url": "https://sinyx.me"}'</code></pre>
+            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+            <pre><code><span class="keyword">curl</span> <span class="keyword">-X</span> <span class="method">POST</span> https://api.sinyx.me/v1/extract \
+  <span class="keyword">-H</span> <span class="string">"x-rapidapi-key: YOUR_RAPIDAPI_KEY"</span> \
+  <span class="keyword">-d</span> <span class="string">'{"url": "https://sinyx.me"}'</span></code></pre>
         </div>
     </main>
 
@@ -356,16 +377,15 @@
                 <h4>Platform</h4>
                 <ul>
                     <li><a href="https://rapidapi.com/ibasitkhan98/api/url-to-markdown2/pricing" target="_blank">Pricing</a></li>
-                    <li><a href="https://www.postman.com/bestboy717-5553701/url-to-markdown/collection/28zk2pf/url-to-markdown-api?" target="_blank">API Documentation</a></li>
-                    <li><a href="mailto:support@sinyx.me">Contact Support</a></li>
+                    <li><a href="docs.html">API Documentation</a></li>
+                    <li><a href="mailto:ibasitkhan.98@gmail.com">Contact Support</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Socials</h4>
                 <ul>
-                    <li><a href="https://github.com/bestboy717-5553701" target="_blank">GitHub</a></li>
-                    <li><a href="https://twitter.com/" target="_blank">X (Twitter)</a></li>
-                    <li><a href="https://linkedin.com/" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://github.com/imbasito" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/imbasito" target="_blank">LinkedIn</a></li>
                 </ul>
             </div>
         </div>

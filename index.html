@@ -448,22 +448,50 @@
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script>
+        function normalizeUrlInput(value) {
+            const trimmed = value.trim();
+
+            if (!trimmed) {
+                return "";
+            }
+
+            const hasScheme = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(trimmed);
+            return hasScheme ? trimmed : `https://${trimmed}`;
+        }
+
         document.getElementById('demo-btn').addEventListener('click', async () => {
             const btn = document.getElementById('demo-btn');
             const output = document.getElementById('demo-output');
-            const urlInput = document.getElementById('demo-url').value;
+            const demoUrlInput = document.getElementById('demo-url');
+            const normalizedUrl = normalizeUrlInput(demoUrlInput.value);
             
             // Get the token using the official Cloudflare API (returns undefined if not ready)
             const token = typeof turnstile !== "undefined" ? turnstile.getResponse() : undefined;
 
-            if (!urlInput) {
+            if (!normalizedUrl) {
                 alert("Please paste a URL first.");
                 return;
             }
+
+            let parsedUrl;
+            try {
+                parsedUrl = new URL(normalizedUrl);
+            } catch {
+                alert("Please enter a valid URL (for example: https://example.com).");
+                return;
+            }
+
+            if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+                alert("Only http:// and https:// URLs are supported.");
+                return;
+            }
+
             if (!token) {
                 alert("Please wait for the Cloudflare security check.");
                 return;
             }
+
+            demoUrlInput.value = normalizedUrl;
 
             btn.innerText = "Extracting...";
             btn.style.opacity = "0.7";
@@ -476,7 +504,7 @@
                 const response = await fetch("https://api.sinyx.me/v1/demo", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ url: urlInput, turnstileToken: token })
+                    body: JSON.stringify({ url: normalizedUrl, turnstileToken: token })
                 });
 
                 const data = await response.json();

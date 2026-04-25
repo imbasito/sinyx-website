@@ -244,8 +244,8 @@
         font-size: 1rem; outline: none; transition: border-color 0.3s;
       }
       .demo-input-group input:focus { border-color: var(--accent-purple); }
-      .demo-btn { white-space: nowrap; cursor: pointer; border: none; }
-      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } }
+      .demo-btn { width: auto; padding: 1rem 2rem; white-space: nowrap; cursor: pointer; border: none; font-size: 1rem; }
+      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } .demo-btn { width: 100%; } }
       .cf-turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 1rem; }
 
       /* Footer */
@@ -348,6 +348,7 @@
         </section>
 
         <!-- Features Section -->
+        <section id="features" class="features">
             <div class="feature-card">
                 <h3>🛡️ SSRF Protected</h3>
                 <p>Built for production. We automatically block internal network requests and localhost lookups, shielding your infrastructure from Server-Side Request Forgery.</p>

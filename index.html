@@ -342,7 +342,7 @@
                     <!-- Cloudflare Turnstile -->
                     <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID" data-callback="onTurnstileSuccess"></div>
                 </div>
-                <input type="hidden" id="demo-token" value="dummy-token">
+                <input type="hidden" id="demo-token" value="">
 
                 <div class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:400px; overflow-y:auto;">
                     <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
@@ -499,6 +499,12 @@
                 btn.innerText = "Extract Markdown";
                 btn.style.opacity = "1";
                 btn.disabled = false;
+                
+                // Tokens are single-use. We must reset the widget to generate a new token for the next request.
+                if (typeof turnstile !== "undefined") {
+                    turnstile.reset();
+                    document.getElementById('demo-token').value = "";
+                }
             }
         });
     </script>

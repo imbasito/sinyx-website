@@ -446,7 +446,7 @@
         </div>
     </footer>
 
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
     <script>
         function normalizeUrlInput(value) {
             const trimmed = value.trim();
@@ -535,7 +535,8 @@
                     output.innerText = data.markdown || data.content || JSON.stringify(data, null, 2);
                 } else {
                     output.style.color = "#ff5f56";
-                    output.innerText = "Error: " + (data.error || "Extraction failed.");
+                    output.innerText = "Error: " + (data.error || "Extraction failed.") +
+                      (data.details ? "\n\nDetails: " + data.details : "");
                 }
             } catch (err) {
                 output.style.color = "#ff5f56";

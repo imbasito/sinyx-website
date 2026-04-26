@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Sinyx API</title>
+    <link rel="icon" type="image/png" href="URL_to_Markdown.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-dark: #0A0A0A;
+        --text-main: #E2E8F0;
+        --accent-purple: #8b5cf6;
+        --accent-blue: #3b82f6;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --card-border: rgba(255, 255, 255, 0.1);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html {
+        scroll-padding-top: 100px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-main);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      .glow-bg {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%);
+        top: -200px;
+        right: -200px;
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(80px);
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        backdrop-filter: blur(12px);
+        background: rgba(10, 10, 10, 0.8);
+        border-bottom: 1px solid var(--card-border);
+        z-index: 1000;
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 1.5rem;
+        background: linear-gradient(90deg, #fff, var(--accent-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+      }
+      .nav-links { display: flex; gap: 2rem; }
+      .nav-links a {
+        color: #9ca3af;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover { color: #fff; }
+
+      /* Content */
+      .doc-container {
+        max-width: 900px;
+        margin: 8rem auto 4rem;
+        padding: 0 2rem;
+        min-height: 60vh;
+      }
+      h1 { font-size: 3.5rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
+      .last-updated { font-size: 0.95rem; color: #6b7280; margin-bottom: 3rem; }
+      h2 { font-size: 1.8rem; margin: 3.5rem 0 1rem; color: #fff; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+      p { font-size: 1.05rem; color: #9ca3af; margin-bottom: 1.2rem; font-weight: 300; }
+      ul { color: #9ca3af; margin-bottom: 1.5rem; padding-left: 1.5rem; font-weight: 300; }
+      ul li { margin-bottom: 0.6rem; font-size: 1.05rem; }
+      a { color: var(--accent-purple); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* Footer */
+      footer {
+        border-top: 1px solid var(--card-border);
+        padding: 6rem 2rem 2rem 2rem;
+        background: #050505;
+      }
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+      }
+      .footer-brand h3 {
+        font-weight: 800;
+        font-size: 1.5rem;
+        background: linear-gradient(90deg, #fff, var(--accent-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+      }
+      .footer-brand p { color: #9ca3af; font-size: 0.95rem; max-width: 300px; }
+      .footer-links h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1rem; }
+      .footer-links ul { list-style: none; padding-left: 0; }
+      .footer-links li { margin-bottom: 0.8rem; }
+      .footer-links a { color: #9ca3af; text-decoration: none; transition: color 0.3s; font-size: 0.95rem; }
+      .footer-links a:hover { color: #fff; text-decoration: underline; }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        color: #6b7280;
+        font-size: 0.9rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--card-border);
+      }
+
+      @media (max-width: 900px) {
+        .footer-grid { grid-template-columns: 1fr; }
+        .nav-links { gap: 1rem; }
+        h1 { font-size: 2.5rem; }
+      }
+    </style>
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="display:flex; align-items:center;">
+                <img src="URL_to_Markdown.png" alt="Sinyx Logo" height="32" style="margin-right: 12px; border-radius: 4px;">
+                SINYX API
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="docs.html">Docs</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="doc-container">
+        <h1>Terms of Service</h1>
+        <p class="last-updated">Last updated: April 26, 2026</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using the Sinyx API ("the Service"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service. These terms apply to all users, including those accessing the Service through RapidAPI, the public demo at sinyx.me, or direct API integration.</p>
+
+        <h2>2. Service Description</h2>
+        <p>Sinyx provides a URL-to-Markdown extraction API that converts web page content into structured formats including Markdown, plain text, HTML, and semantic chunks. The Service is designed for AI engineers, RAG pipelines, LLM applications, and content automation workflows.</p>
+
+        <h2>3. Acceptable Use</h2>
+        <p>You agree not to:</p>
+        <ul>
+            <li>Use the Service to extract content from websites that explicitly prohibit scraping in their robots.txt or terms of service</li>
+            <li>Attempt to access private, internal, or local network resources through the API (SSRF attacks)</li>
+            <li>Use the Service for mass surveillance, credential harvesting, or any activity that violates applicable laws</li>
+            <li>Resell or redistribute the raw API output as a competing service without written permission</li>
+            <li>Bypass or attempt to bypass rate limits, authentication, or security measures</li>
+            <li>Upload, transmit, or process content that is illegal, harassing, or infringes on intellectual property rights</li>
+        </ul>
+
+        <h2>4. API Keys & Authentication</h2>
+        <p>API access is authenticated through keys provisioned via RapidAPI or direct origin keys. You are responsible for:</p>
+        <ul>
+            <li>Keeping your API keys confidential and secure</li>
+            <li>All activity occurring under your API key</li>
+            <li>Notifying us immediately if your key is compromised</li>
+        </ul>
+        <p>We reserve the right to revoke or rotate API keys at any time for security reasons or violation of these terms.</p>
+
+        <h2>5. Rate Limits & Fair Usage</h2>
+        <p>The Service enforces rate limits to ensure fair access for all users. Current limits are:</p>
+        <ul>
+            <li><strong>Authenticated endpoints:</strong> 60 requests per minute per API key</li>
+            <li><strong>Demo endpoint:</strong> 3 requests per day per IP address, 30 per minute globally</li>
+            <li><strong>Batch extraction:</strong> Maximum 5 URLs per request</li>
+        </ul>
+        <p>We reserve the right to adjust rate limits and throttle or suspend access for excessive usage that degrades service for other users.</p>
+
+        <h2>6. Intellectual Property</h2>
+        <p>The Sinyx API, its codebase, documentation, and branding are owned by Sinyx. You retain ownership of the content you extract and process through the Service. We do not store, cache, or retain extracted content after the response is delivered.</p>
+
+        <h2>7. Disclaimer of Warranties</h2>
+        <p>The Service is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not guarantee:</p>
+        <ul>
+            <li>Uninterrupted or error-free operation of the Service</li>
+            <li>Successful extraction from any specific URL (some websites employ anti-bot measures)</li>
+            <li>Accuracy or completeness of extracted content</li>
+        </ul>
+
+        <h2>8. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, Sinyx shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Service, including but not limited to data loss, service interruption, or business disruption.</p>
+
+        <h2>9. Privacy & Data Handling</h2>
+        <p>We do not store or log the content of URLs you submit for extraction. Request metadata (endpoint, status code, response time) may be collected for operational monitoring and abuse prevention. Our full data handling practices are described in our <a href="#">Privacy Policy</a>.</p>
+
+        <h2>10. Termination</h2>
+        <p>We reserve the right to suspend or terminate access to the Service at any time for violation of these terms, suspected abuse, or any reason at our sole discretion. Upon termination, your right to use the Service ceases immediately.</p>
+
+        <h2>11. Changes to These Terms</h2>
+        <p>We may update these Terms of Service from time to time. Material changes will be communicated through our website or RapidAPI listing. Continued use of the Service after changes take effect constitutes acceptance of the updated terms.</p>
+
+        <h2>12. Governing Law</h2>
+        <p>These terms are governed by the laws of India. Any disputes arising from these terms or the Service shall be resolved in the courts of Delhi, India.</p>
+
+        <h2>13. Contact</h2>
+        <p>Questions about these terms? Reach out at <a href="mailto:ibasitkhan.98@gmail.com">ibasitkhan.98@gmail.com</a>.</p>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>SINYX API</h3>
+                <p>Enterprise-grade URL-to-Markdown extraction. Built for AI engineers, RAG pipelines, and LLM developers everywhere.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="https://rapidapi.com/ibasitkhan98/api/url-to-markdown2/pricing" target="_blank">Pricing</a></li>
+                    <li><a href="docs.html">API Documentation</a></li>
+                    <li><a href="mailto:ibasitkhan.98@gmail.com">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Socials</h4>
+                <ul>
+                    <li><a href="https://github.com/imbasito" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/imbasito" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sinyx API. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinyx - The Developer-First URL to Markdown API</title>
+    <title>Sinyx — Web Extraction for AI</title>
     <link rel="icon" type="image/png" href="URL_to_Markdown.png">
-    <meta name="description" content="Intelligently extract readable content from any web page and convert it into clean Markdown for AI and RAG pipelines.">
+    <meta name="description" content="Sinyx — extract readable content from any web page and convert it into clean Markdown, text, HTML, or semantic chunks for AI and RAG pipelines.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
       :root {
@@ -352,7 +352,7 @@
         <div class="nav-container">
             <a href="index.html" class="logo" style="display:flex; align-items:center;">
                 <img src="URL_to_Markdown.png" alt="Sinyx Logo" height="32" style="margin-right: 12px; border-radius: 4px;">
-                SINYX API
+                Sinyx
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
@@ -484,8 +484,8 @@
     <footer id="contact">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3>SINYX API</h3>
-                <p>Enterprise-grade URL-to-Markdown extraction. Built for AI engineers, RAG pipelines, and LLM developers everywhere.</p>
+                <h3>Sinyx</h3>
+                <p>Web content extraction for AI. Markdown, text, HTML, and semantic chunks — from any URL, for any pipeline.</p>
             </div>
             <div class="footer-links">
                 <h4>Platform</h4>
@@ -510,169 +510,6 @@
     </footer>
 
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
-    <script>
-        function normalizeUrlInput(value) {
-            const trimmed = value.trim();
-
-            if (!trimmed) {
-                return "";
-            }
-
-            if (/^https?:\/\//i.test(trimmed)) {
-                return trimmed;
-            }
-
-            if (/^\/\//.test(trimmed)) {
-                return `https:${trimmed}`;
-            }
-
-            if (/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(trimmed)) {
-                return trimmed;
-            }
-
-            const hostWithPortPattern = /^(?:\[[0-9a-fA-F:]+\]|localhost|\d{1,3}(?:\.\d{1,3}){3}|[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+):\d{1,5}(?:[/?#]|$)/;
-            if (hostWithPortPattern.test(trimmed)) {
-                return `https://${trimmed}`;
-            }
-
-            const hasSchemeWithoutSlashes = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(trimmed);
-            if (hasSchemeWithoutSlashes) {
-                return trimmed;
-            }
-
-            return `https://${trimmed}`;
-        }
-
-        function renderChunks(chunks, container) {
-            const outputContainer = document.getElementById('demo-output-container');
-            // Replace the code window internals with chunk cards
-            outputContainer.innerHTML = `
-                <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <div class="chunks-container">
-                    <div class="chunks-header">
-                        <h4>🧠 Semantic Chunks</h4>
-                        <span class="chunks-count">${chunks.length} chunks extracted</span>
-                    </div>
-                    ${chunks.map(c => {
-                        const p = typeof c.priority === 'string' ? parseFloat(c.priority) : c.priority;
-                        const pClass = p >= 0.7 ? 'priority-high' : p >= 0.4 ? 'priority-mid' : 'priority-low';
-                        const pLabel = p >= 0.7 ? '🔥 High' : p >= 0.4 ? '⚡ Mid' : '🔇 Low';
-                        const path = c.headingPath || c.path || 'Root';
-                        return `
-                            <div class="chunk-card">
-                                <div class="chunk-meta">
-                                    <span class="chunk-path" title="${path}">${path}</span>
-                                    <span class="chunk-priority ${pClass}">${pLabel} ${p.toFixed(2)}</span>
-                                </div>
-                                <div class="chunk-content">${c.content.substring(0, 250).replace(/</g, '&lt;').replace(/>/g, '&gt;')}${c.content.length > 250 ? '...' : ''}</div>
-                                <div class="chunk-footer">
-                                    <span class="chunk-stat">#${c.chunkIndex}</span>
-                                    <span class="chunk-stat">${c.charCount.toLocaleString()} chars</span>
-                                    <span class="chunk-stat">H${c.headingLevel || 0}</span>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-        }
-
-        function resetOutputToCode() {
-            const outputContainer = document.getElementById('demo-output-container');
-            outputContainer.innerHTML = `
-                <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                <pre><code id="demo-output" style="color: #a7f3d0;">Awaiting url...</code></pre>
-            `;
-        }
-
-        document.getElementById('demo-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('demo-btn');
-            const demoUrlInput = document.getElementById('demo-url');
-            const format = document.getElementById('demo-format').value;
-            const normalizedUrl = normalizeUrlInput(demoUrlInput.value);
-            
-            // Get the token using the official Cloudflare API (returns undefined if not ready)
-            const token = typeof turnstile !== "undefined" ? turnstile.getResponse() : undefined;
-
-            if (!normalizedUrl) {
-                alert("Please paste a URL first.");
-                return;
-            }
-
-            let parsedUrl;
-            try {
-                parsedUrl = new URL(normalizedUrl);
-            } catch {
-                alert("Please enter a valid URL (for example: https://example.com).");
-                return;
-            }
-
-            if (!["http:", "https:"].includes(parsedUrl.protocol)) {
-                alert("Only http:// and https:// URLs are supported.");
-                return;
-            }
-
-            if (!token) {
-                alert("Please wait for the Cloudflare security check.");
-                return;
-            }
-
-            demoUrlInput.value = normalizedUrl;
-
-            // Reset to code view for loading state
-            resetOutputToCode();
-            const output = document.getElementById('demo-output');
-
-            btn.innerText = "Extracting...";
-            btn.style.opacity = "0.7";
-            btn.disabled = true;
-            output.style.color = "#8b5cf6";
-            output.innerText = `Bypassing anti-bot...\nExtracting readable content...\n${format === 'chunks' ? 'Semantic chunking & priority scoring...' : 'Converting to ' + format + '...'}\n\nProcessing...`;
-
-            try {
-                // Fetching from the production API
-                const response = await fetch("https://api.sinyx.me/v1/demo", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ url: normalizedUrl, turnstileToken: token, format })
-                });
-
-                const data = await response.json();
-                
-                if (response.ok && data.success) {
-                    if (format === 'chunks' && data.chunks) {
-                        renderChunks(data.chunks);
-                    } else {
-                        output.style.color = "#E2E8F0";
-                        if (format === 'markdown') {
-                            output.innerText = data.markdown || '';
-                        } else if (format === 'text') {
-                            output.innerText = data.text || '';
-                        } else if (format === 'html') {
-                            output.innerText = data.html || '';
-                        } else {
-                            output.innerText = JSON.stringify(data, null, 2);
-                        }
-                    }
-                } else {
-                    output.style.color = "#ff5f56";
-                    output.innerText = "Error: " + (data.error || "Extraction failed.") +
-                      (data.details ? "\n\nDetails: " + data.details : "");
-                }
-            } catch (err) {
-                output.style.color = "#ff5f56";
-                output.innerText = "Network Error: Could not connect to Sinyx API.";
-            } finally {
-                btn.innerText = "Extract";
-                btn.style.opacity = "1";
-                btn.disabled = false;
-                
-                // Tokens are single-use. We must reset the widget to generate a new token for the next request.
-                if (typeof turnstile !== "undefined") {
-                    turnstile.reset();
-                }
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

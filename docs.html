@@ -224,7 +224,7 @@
                     <td><code>format</code></td>
                     <td>String</td>
                     <td>No</td>
-                    <td>Output format. Options: <code>markdown</code>, <code>text</code>, <code>html</code>, <code>full</code>. Default: <code>full</code>.</td>
+                    <td>Output format. Options: <code>markdown</code>, <code>text</code>, <code>html</code>, <code>full</code>, <code>chunks</code>. Default: <code>full</code>.</td>
                 </tr>
             </tbody>
         </table>
@@ -279,6 +279,77 @@ headers = {
 
 response = requests.post(url, json=payload, headers=headers)
 <span class="keyword">print</span>(response.json())</code></pre>
+        </div>
+
+        <h2>RAG Chunks Format</h2>
+        <p>Set <code>format: "chunks"</code> to receive semantically segmented content with heading breadcrumbs and priority scoring. Each chunk is a self-contained block ready for vector database ingestion.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>chunkIndex</code></td>
+                    <td>Number</td>
+                    <td>Sequential index (0, 1, 2...) for ordering chunks.</td>
+                </tr>
+                <tr>
+                    <td><code>headingPath</code></td>
+                    <td>String</td>
+                    <td>Hierarchical breadcrumb of the chunk's position, e.g. <code>Root > Setup > Installation</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>headingLevel</code></td>
+                    <td>Number</td>
+                    <td>The heading depth (2 = H2, 3 = H3, etc.). Root-level content is <code>0</code>.</td>
+                </tr>
+                <tr>
+                    <td><code>content</code></td>
+                    <td>String</td>
+                    <td>The extracted plain-text content of this chunk.</td>
+                </tr>
+                <tr>
+                    <td><code>charCount</code></td>
+                    <td>Number</td>
+                    <td>Character count of the content.</td>
+                </tr>
+                <tr>
+                    <td><code>priority</code></td>
+                    <td>Number</td>
+                    <td>Relevance score from <code>0.0</code> (noise, e.g. footer) to <code>1.0</code> (high-value, e.g. definitions). Use this to filter or sort chunks before sending to your LLM.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Code Example: RAG Chunks (Python)</h2>
+        <p>Extract semantically chunked content and filter by priority for your RAG pipeline.</p>
+        <div class="code-window">
+            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+            <pre><code><span class="keyword">import</span> requests
+
+url = <span class="string">"https://url-to-markdown2.p.rapidapi.com/v1/extract"</span>
+payload = { 
+    <span class="string">"url"</span>: <span class="string">"https://en.wikipedia.org/wiki/Artificial_intelligence"</span>,
+    <span class="string">"format"</span>: <span class="string">"chunks"</span>
+}
+headers = {
+    <span class="string">"x-rapidapi-key"</span>: <span class="string">"YOUR_KEY"</span>,
+    <span class="string">"x-rapidapi-host"</span>: <span class="string">"url-to-markdown2.p.rapidapi.com"</span>,
+    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
+}
+
+response = requests.post(url, json=payload, headers=headers)
+data = response.json()
+
+<span class="keyword"># Filter high-value chunks for your vector DB</span>
+high_value = [c <span class="keyword">for</span> c <span class="keyword">in</span> data[<span class="string">"chunks"</span>] <span class="keyword">if</span> c[<span class="string">"priority"</span>] >= 0.6]
+
+<span class="keyword">for</span> chunk <span class="keyword">in</span> high_value:
+    <span class="keyword">print</span>(f"{chunk[<span class="string">'headingPath'</span>]} → {chunk[<span class="string">'content'</span>][:80]}...")</code></pre>
         </div>
     </main>
 

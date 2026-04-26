@@ -119,7 +119,7 @@
         margin: 8rem auto;
         padding: 0 2rem;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
       }
       .feature-card {
@@ -241,16 +241,60 @@
         background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(20px);
         padding: 3rem; border-radius: 24px; border: 1px solid var(--card-border);
       }
-      .demo-input-group { display: flex; gap: 1rem; margin-bottom: 2rem; }
+      .demo-input-group { display: flex; gap: 1rem; margin-bottom: 1rem; }
       .demo-input-group input {
         flex: 1; padding: 1rem 1.5rem; border-radius: 50px; border: 1px solid var(--card-border);
         background: rgba(255, 255, 255, 0.05); color: #fff; font-family: 'JetBrains Mono', monospace;
         font-size: 1rem; outline: none; transition: border-color 0.3s;
       }
       .demo-input-group input:focus { border-color: var(--accent-purple); }
+      .demo-controls { display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center; justify-content: center; }
+      .demo-controls select {
+        padding: 0.75rem 1.2rem; border-radius: 50px; border: 1px solid var(--card-border);
+        background: rgba(255, 255, 255, 0.05); color: #fff; font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem; outline: none; cursor: pointer; transition: border-color 0.3s;
+        -webkit-appearance: none; appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
+      }
+      .demo-controls select:focus { border-color: var(--accent-purple); }
       .demo-btn { width: auto; padding: 1rem 2rem; white-space: nowrap; cursor: pointer; border: none; font-size: 1rem; }
-      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } .demo-btn { width: 100%; } }
+      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } .demo-btn { width: 100%; } .demo-controls { flex-direction: column; } }
       .cf-turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 1rem; }
+
+      /* Chunk Cards */
+      .chunks-container { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; }
+      .chunks-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+      .chunks-header h4 { color: #fff; font-size: 1.1rem; }
+      .chunks-count { color: var(--accent-purple); font-size: 0.9rem; font-weight: 600; }
+      .chunk-card {
+        background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 12px;
+        padding: 1.25rem 1.5rem; text-align: left; transition: border-color 0.3s, transform 0.2s;
+      }
+      .chunk-card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-2px); }
+      .chunk-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+      .chunk-path {
+        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-blue);
+        background: rgba(59, 130, 246, 0.1); padding: 0.3rem 0.75rem; border-radius: 20px;
+        max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .chunk-priority {
+        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
+        padding: 0.3rem 0.75rem; border-radius: 20px;
+      }
+      .priority-high { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+      .priority-mid { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+      .priority-low { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+      .chunk-content {
+        font-size: 0.9rem; color: #9ca3af; line-height: 1.6;
+        max-height: 80px; overflow: hidden; position: relative;
+      }
+      .chunk-content::after {
+        content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+        height: 30px; background: linear-gradient(transparent, rgba(15, 15, 15, 0.95));
+      }
+      .chunk-footer { display: flex; gap: 1rem; margin-top: 0.5rem; }
+      .chunk-stat { font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace; }
 
       /* Footer */
       footer {
@@ -318,7 +362,7 @@
         <section class="hero">
             <div class="hero-content">
                 <h1>Turn messy web URLs into <span class="gradient-text">Clean AI Data.</span></h1>
-                <p>Enterprise-grade URL-to-Markdown extraction for LLMs and RAG. 100% security hardened with SSRF protection.</p>
+                <p>Enterprise-grade extraction with semantic RAG chunking and priority scoring. Built for LLMs, AI agents, and vector databases.</p>
                 <div style="max-width: 300px;">
                     <a href="#pricing" class="btn btn-primary">Get API Key</a>
                 </div>
@@ -335,7 +379,16 @@
             <div class="demo-box">
                 <div class="demo-input-group">
                     <input type="url" id="demo-url" placeholder="Paste any article URL..." required>
-                    <button class="btn btn-primary demo-btn" id="demo-btn">Extract Markdown</button>
+                </div>
+                <div class="demo-controls">
+                    <select id="demo-format">
+                        <option value="markdown">📝 Markdown</option>
+                        <option value="chunks">🧠 RAG Chunks</option>
+                        <option value="text">📄 Plain Text</option>
+                        <option value="html">🔗 Raw HTML</option>
+                        <option value="full">📊 Full (with metadata)</option>
+                    </select>
+                    <button class="btn btn-primary demo-btn" id="demo-btn">Extract</button>
                 </div>
                 
                 <div class="cf-turnstile-wrapper">
@@ -343,7 +396,7 @@
                     <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID"></div>
                 </div>
 
-                <div class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:400px; overflow-y:auto;">
+                <div id="demo-output-container" class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:500px; overflow-y:auto;">
                     <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
                     <pre><code id="demo-output" style="color: #a7f3d0;">Awaiting url...</code></pre>
                 </div>
@@ -352,6 +405,10 @@
 
         <!-- Features Section -->
         <section id="features" class="features">
+            <div class="feature-card" style="border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.03);">
+                <h3>🧠 RAG-Ready Chunks</h3>
+                <p>Semantic chunking with heading breadcrumbs and priority scoring. Feed directly into vector databases—no preprocessing needed. Each chunk gets a 0.0–1.0 relevance score.</p>
+            </div>
             <div class="feature-card">
                 <h3>🛡️ SSRF Protected</h3>
                 <p>Built for production. We automatically block internal network requests and localhost lookups, shielding your infrastructure from Server-Side Request Forgery.</p>
@@ -480,10 +537,52 @@
             return `https://${trimmed}`;
         }
 
+        function renderChunks(chunks, container) {
+            const outputContainer = document.getElementById('demo-output-container');
+            // Replace the code window internals with chunk cards
+            outputContainer.innerHTML = `
+                <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <div class="chunks-container">
+                    <div class="chunks-header">
+                        <h4>🧠 Semantic Chunks</h4>
+                        <span class="chunks-count">${chunks.length} chunks extracted</span>
+                    </div>
+                    ${chunks.map(c => {
+                        const p = typeof c.priority === 'string' ? parseFloat(c.priority) : c.priority;
+                        const pClass = p >= 0.7 ? 'priority-high' : p >= 0.4 ? 'priority-mid' : 'priority-low';
+                        const pLabel = p >= 0.7 ? '🔥 High' : p >= 0.4 ? '⚡ Mid' : '🔇 Low';
+                        const path = c.headingPath || c.path || 'Root';
+                        return `
+                            <div class="chunk-card">
+                                <div class="chunk-meta">
+                                    <span class="chunk-path" title="${path}">${path}</span>
+                                    <span class="chunk-priority ${pClass}">${pLabel} ${p.toFixed(2)}</span>
+                                </div>
+                                <div class="chunk-content">${c.content.substring(0, 250).replace(/</g, '&lt;').replace(/>/g, '&gt;')}${c.content.length > 250 ? '...' : ''}</div>
+                                <div class="chunk-footer">
+                                    <span class="chunk-stat">#${c.chunkIndex}</span>
+                                    <span class="chunk-stat">${c.charCount.toLocaleString()} chars</span>
+                                    <span class="chunk-stat">H${c.headingLevel || 0}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function resetOutputToCode() {
+            const outputContainer = document.getElementById('demo-output-container');
+            outputContainer.innerHTML = `
+                <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre><code id="demo-output" style="color: #a7f3d0;">Awaiting url...</code></pre>
+            `;
+        }
+
         document.getElementById('demo-btn').addEventListener('click', async () => {
             const btn = document.getElementById('demo-btn');
-            const output = document.getElementById('demo-output');
             const demoUrlInput = document.getElementById('demo-url');
+            const format = document.getElementById('demo-format').value;
             const normalizedUrl = normalizeUrlInput(demoUrlInput.value);
             
             // Get the token using the official Cloudflare API (returns undefined if not ready)
@@ -514,25 +613,41 @@
 
             demoUrlInput.value = normalizedUrl;
 
+            // Reset to code view for loading state
+            resetOutputToCode();
+            const output = document.getElementById('demo-output');
+
             btn.innerText = "Extracting...";
             btn.style.opacity = "0.7";
             btn.disabled = true;
             output.style.color = "#8b5cf6";
-            output.innerText = "Bypassing anti-bot...\nExtracting readable content...\nConverting to Markdown...\n\nProcessing...";
+            output.innerText = `Bypassing anti-bot...\nExtracting readable content...\n${format === 'chunks' ? 'Semantic chunking & priority scoring...' : 'Converting to ' + format + '...'}\n\nProcessing...`;
 
             try {
                 // Fetching from the production API
                 const response = await fetch("https://api.sinyx.me/v1/demo", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ url: normalizedUrl, turnstileToken: token })
+                    body: JSON.stringify({ url: normalizedUrl, turnstileToken: token, format })
                 });
 
                 const data = await response.json();
                 
                 if (response.ok && data.success) {
-                    output.style.color = "#E2E8F0";
-                    output.innerText = data.markdown || data.content || JSON.stringify(data, null, 2);
+                    if (format === 'chunks' && data.chunks) {
+                        renderChunks(data.chunks);
+                    } else {
+                        output.style.color = "#E2E8F0";
+                        if (format === 'markdown') {
+                            output.innerText = data.markdown || '';
+                        } else if (format === 'text') {
+                            output.innerText = data.text || '';
+                        } else if (format === 'html') {
+                            output.innerText = data.html || '';
+                        } else {
+                            output.innerText = JSON.stringify(data, null, 2);
+                        }
+                    }
                 } else {
                     output.style.color = "#ff5f56";
                     output.innerText = "Error: " + (data.error || "Extraction failed.") +
@@ -542,7 +657,7 @@
                 output.style.color = "#ff5f56";
                 output.innerText = "Network Error: Could not connect to Sinyx API.";
             } finally {
-                btn.innerText = "Extract Markdown";
+                btn.innerText = "Extract";
                 btn.style.opacity = "1";
                 btn.disabled = false;
                 

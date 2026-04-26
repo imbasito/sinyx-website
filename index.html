@@ -15,6 +15,7 @@
         --accent-blue: #3b82f6;
         --card-bg: rgba(255, 255, 255, 0.03);
         --card-border: rgba(255, 255, 255, 0.1);
+        color-scheme: dark;
       }
       
       * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -258,6 +259,10 @@
         background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
       }
       .demo-controls select:focus { border-color: var(--accent-purple); }
+      .demo-controls select option {
+        background-color: #121212;
+        color: #fff;
+      }
       .demo-btn { width: auto; padding: 1rem 2rem; white-space: nowrap; cursor: pointer; border: none; font-size: 1rem; }
       @media (max-width: 600px) { .demo-input-group { flex-direction: column; } .demo-btn { width: 100%; } .demo-controls { flex-direction: column; } }
       .cf-turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 1rem; }

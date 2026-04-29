@@ -1,0 +1,4 @@
+Contact: mailto:ibasitkhan.98@gmail.com
+Preferred-Languages: en
+Canonical: https://sinyx.me/.well-known/security.txt
+Policy: https://sinyx.me/tos

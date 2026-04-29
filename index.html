@@ -1,547 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinyx — Web Extraction for AI</title>
-    <link rel="icon" type="image/png" href="URL_to_Markdown.png">
-    <meta name="description" content="Sinyx — extract readable content from any web page and convert it into clean Markdown, text, HTML, or semantic chunks for AI and RAG pipelines.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg-dark: #0A0A0A;
-        --text-main: #E2E8F0;
-        --accent-purple: #8b5cf6;
-        --accent-blue: #3b82f6;
-        --card-bg: rgba(255, 255, 255, 0.03);
-        --card-border: rgba(255, 255, 255, 0.1);
-        color-scheme: dark;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sinyx - Web Content Infrastructure for AI</title>
+  <meta name="description" content="Sinyx converts messy public web pages into clean Markdown, text, HTML, and semantic chunks for AI workflows.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/">
+  <meta property="og:title" content="Sinyx - Web Content Infrastructure for AI">
+  <meta property="og:description" content="Make messy web content usable for AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sinyx.me/">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sinyx - Web Content Infrastructure for AI">
+  <meta name="twitter:description" content="Make messy web content usable for AI.">
+  <meta name="twitter:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sinyx",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Sinyx converts public web pages into clean Markdown, text, HTML, and semantic chunks for AI workflows.",
+      "url": "https://sinyx.me/",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://rapidapi.com/ibasitkhan98/api/sinyx/pricing"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Sinyx",
+        "url": "https://sinyx.me/"
       }
-      
-      * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-      
-      html {
-        scroll-padding-top: 100px; /* Prevents anchor links from hiding under fixed nav */
-      }
-
-      body {
-        font-family: 'Outfit', sans-serif;
-        background-color: var(--bg-dark);
-        color: var(--text-main);
-        overflow-x: hidden;
-        line-height: 1.6;
-      }
-
-      .glow-bg {
-        position: absolute;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%);
-        top: -200px;
-        right: -200px;
-        z-index: -1;
-        border-radius: 50%;
-        filter: blur(80px);
-      }
-
-      /* Navigation */
-      nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        backdrop-filter: blur(12px);
-        background: rgba(10, 10, 10, 0.8);
-        border-bottom: 1px solid var(--card-border);
-        z-index: 1000;
-      }
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo {
-        font-weight: 800;
-        font-size: 1.5rem;
-        background: linear-gradient(90deg, #fff, var(--accent-purple));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-decoration: none;
-      }
-      .nav-links { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-end; }
-      .nav-links a {
-        color: #9ca3af;
-        text-decoration: none;
-        font-size: 0.95rem;
-        transition: color 0.3s;
-      }
-      .nav-links a:hover { color: #fff; }
-
-      /* Hero Section */
-      .hero {
-        max-width: 1200px;
-        margin: 8rem auto 4rem auto;
-        padding: 0 2rem;
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 4rem;
-        align-items: center;
-      }
-      .hero-content h1 {
-        font-size: 4.5rem;
-        font-weight: 800;
-        line-height: 1.05;
-        margin-bottom: 1.5rem;
-        letter-spacing: -2px;
-      }
-      .gradient-text {
-        background: linear-gradient(to right, var(--accent-purple), var(--accent-blue));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .hero-content p {
-        font-size: 1.3rem;
-        color: #9ca3af;
-        margin-bottom: 3rem;
-        font-weight: 300;
-      }
-      .hero-visual img {
-        width: 100%;
-        border-radius: 24px;
-        border: 1px solid var(--card-border);
-        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
-      }
-
-      /* Features Section */
-      .features {
-        max-width: 1200px;
-        margin: 8rem auto;
-        padding: 0 2rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-      .feature-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        padding: 2.5rem;
-        border-radius: 16px;
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s ease;
-      }
-      .feature-card:hover { border-color: rgba(139, 92, 246, 0.3); }
-      .feature-card h3 { font-size: 1.25rem; margin-bottom: 1rem; color: #fff; }
-      .feature-card p { color: #9ca3af; font-size: 0.95rem; }
-
-      /* Pricing Section */
-      #pricing {
-        max-width: 1200px;
-        margin: 10rem auto;
-        padding: 0 2rem;
-        text-align: center;
-      }
-      .section-label {
-        font-size: 0.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--accent-purple);
-        margin-bottom: 1rem;
-        display: block;
-      }
-      h2 { font-size: 3rem; margin-bottom: 4rem; letter-spacing: -1px; }
-
-      .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-      }
-      .pricing-card {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        padding: 3rem 2rem;
-        border-radius: 24px;
-        text-align: left;
-        position: relative;
-        transition: transform 0.3s, border-color 0.3s;
-      }
-      .pricing-card.popular {
-        border-color: var(--accent-purple);
-        background: rgba(139, 92, 246, 0.03);
-      }
-      .pricing-card:hover { transform: translateY(-10px); }
-      .price { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 1.5rem 0; }
-      .price span { font-size: 1rem; color: #9ca3af; font-weight: 400; }
-      .pricing-card h3 { font-size: 1.5rem; color: #fff; }
-      .pricing-features { list-style: none; margin: 2rem 0; padding-top: 2rem; border-top: 1px solid var(--card-border); }
-      .pricing-features li { margin-bottom: 1rem; color: #9ca3af; display: flex; align-items: center; gap: 0.5rem; }
-      .pricing-features li::before { content: "✓"; color: var(--accent-blue); font-weight: bold; }
-
-      /* Buttons */
-      .btn {
-        display: inline-block;
-        padding: 1.1rem 2.2rem;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        text-align: center;
-        width: 100%;
-      }
-      .btn-primary {
-        background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-        color: white;
-      }
-      .btn-secondary {
-        background: var(--card-border);
-        color: #fff;
-      }
-      .btn-primary:hover { opacity: 0.9; transform: scale(1.02); }
-
-      /* Code Block */
-      .code-window {
-        max-width: 900px;
-        margin: 0 auto 10rem auto;
-        background: rgba(15, 15, 15, 0.8);
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-        overflow: hidden;
-      }
-      .code-header { 
-        background: rgba(30, 30, 30, 0.9); 
-        padding: 1rem 1.5rem; 
-        display: flex; 
-        gap: 8px; 
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
-      }
-      .dot { width: 12px; height: 12px; border-radius: 50%; }
-      .dot.red { background: #ff5f56; }
-      .dot.yellow { background: #ffbd2e; }
-      .dot.green { background: #27c93f; }
-      pre { 
-        padding: 2.5rem; 
-        overflow-x: auto; 
-        font-family: 'JetBrains Mono', Consolas, monospace; 
-        font-size: 1.05rem; 
-        color: #e2e8f0; 
-        line-height: 1.7;
-      }
-      .keyword { color: var(--accent-purple); font-weight: 600; }
-      .string { color: #a7f3d0; }
-      .method { color: var(--accent-blue); }
-
-      /* Demo Section */
-      .demo-section {
-        max-width: 900px; margin: 0 auto 8rem; padding: 0 2rem; text-align: center;
-      }
-      .demo-box {
-        background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(20px);
-        padding: 3rem; border-radius: 24px; border: 1px solid var(--card-border);
-      }
-      .demo-input-group { display: flex; gap: 1rem; margin-bottom: 1rem; }
-      .demo-input-group input {
-        flex: 1; padding: 1rem 1.5rem; border-radius: 50px; border: 1px solid var(--card-border);
-        background: rgba(255, 255, 255, 0.05); color: #fff; font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem; outline: none; transition: border-color 0.3s;
-      }
-      .demo-input-group input:focus { border-color: var(--accent-purple); }
-      .demo-controls { display: flex; gap: 1rem; margin-bottom: 2rem; align-items: center; justify-content: center; }
-      .demo-controls select {
-        padding: 0.75rem 1.2rem; border-radius: 50px; border: 1px solid var(--card-border);
-        background: rgba(255, 255, 255, 0.05); color: #fff; font-family: 'Outfit', sans-serif;
-        font-size: 0.95rem; outline: none; cursor: pointer; transition: border-color 0.3s;
-        -webkit-appearance: none; appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;
-      }
-      .demo-controls select:focus { border-color: var(--accent-purple); }
-      .demo-controls select option {
-        background-color: #121212;
-        color: #fff;
-      }
-      .demo-btn { width: auto; padding: 1rem 2rem; white-space: nowrap; cursor: pointer; border: none; font-size: 1rem; }
-      .demo-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-      @media (max-width: 600px) {
-        .nav-container { align-items: flex-start; gap: 1rem; }
-        .nav-links { gap: 0.8rem 1rem; }
-        .demo-section { padding: 0 1rem; }
-        .demo-box { padding: 1.25rem; }
-        .demo-input-group { flex-direction: column; }
-        .demo-btn { width: 100%; }
-        .demo-controls { flex-direction: column; }
-      }
-      .cf-turnstile-wrapper {
-        display: flex;
-        justify-content: center;
-        max-width: 100%;
-        min-height: 70px;
-        margin: 0 auto 1.25rem;
-      }
-      .cf-turnstile { max-width: 100%; }
-      .demo-status {
-        min-height: 1.4rem;
-        margin-bottom: 1rem;
-        color: #9ca3af;
-        font-size: 0.95rem;
-      }
-      .demo-status.error { color: #fca5a5; }
-      .demo-status.success { color: #a7f3d0; }
-
-      /* Chunk Cards */
-      .chunks-container { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; }
-      .chunks-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-      .chunks-header h4 { color: #fff; font-size: 1.1rem; }
-      .chunks-count { color: var(--accent-purple); font-size: 0.9rem; font-weight: 600; }
-      .chunk-card {
-        background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 12px;
-        padding: 1.25rem 1.5rem; text-align: left; transition: border-color 0.3s, transform 0.2s;
-      }
-      .chunk-card:hover { border-color: rgba(139, 92, 246, 0.4); transform: translateY(-2px); }
-      .chunk-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
-      .chunk-path {
-        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-blue);
-        background: rgba(59, 130, 246, 0.1); padding: 0.3rem 0.75rem; border-radius: 20px;
-        max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      }
-      .chunk-priority {
-        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700;
-        padding: 0.3rem 0.75rem; border-radius: 20px;
-      }
-      .priority-high { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
-      .priority-mid { background: rgba(234, 179, 8, 0.15); color: #eab308; }
-      .priority-low { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-      .chunk-content {
-        font-size: 0.9rem; color: #9ca3af; line-height: 1.6;
-        max-height: 80px; overflow: hidden; position: relative;
-      }
-      .chunk-content::after {
-        content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-        height: 30px; background: linear-gradient(transparent, rgba(15, 15, 15, 0.95));
-      }
-      .chunk-footer { display: flex; gap: 1rem; margin-top: 0.5rem; }
-      .chunk-stat { font-size: 0.75rem; color: #6b7280; font-family: 'JetBrains Mono', monospace; }
-
-      /* Footer */
-      footer {
-        border-top: 1px solid var(--card-border);
-        padding: 6rem 2rem 2rem 2rem;
-        background: #050505;
-      }
-      .footer-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 4rem;
-        margin-bottom: 4rem;
-      }
-      .footer-brand h3 {
-        font-weight: 800;
-        font-size: 1.5rem;
-        background: linear-gradient(90deg, #fff, var(--accent-purple));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
-      }
-      .footer-brand p { color: #9ca3af; font-size: 0.95rem; max-width: 300px; }
-      .footer-links h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1rem; }
-      .footer-links ul { list-style: none; }
-      .footer-links li { margin-bottom: 0.8rem; }
-      .footer-links a { color: #9ca3af; text-decoration: none; transition: color 0.3s; font-size: 0.95rem; }
-      .footer-links a:hover { color: #fff; text-decoration: underline; }
-      .footer-bottom {
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
-        color: #6b7280;
-        font-size: 0.9rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--card-border);
-      }
-
-      @media (max-width: 900px) {
-        .hero, .pricing-grid, .features, .footer-grid { grid-template-columns: 1fr; }
-        .hero-content h1 { font-size: 3rem; }
-      }
-    </style>
+    }
+  </script>
 </head>
 <body>
-    <div class="glow-bg"></div>
-    
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo" style="display:flex; align-items:center;">
-                <img src="URL_to_Markdown.png" alt="Sinyx Logo" height="32" style="margin-right: 12px; border-radius: 4px;">
-                Sinyx
-            </a>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="docs.html">Docs</a>
-                <a href="#contact">Contact</a>
-            </div>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/tos">Terms of Service</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero-section">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Content infrastructure for developer AI workflows</p>
+          <h1>Make messy web content usable for AI.</h1>
+          <p class="hero-text">Sinyx converts public web pages into clean Markdown, plain text, HTML, and semantic chunks that fit directly into LLM and RAG pipelines.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#demo">Try the product</a>
+            <a class="button button-secondary" href="/docs">Read docs</a>
+          </div>
         </div>
-    </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Turn messy web URLs into <span class="gradient-text">Clean AI Data.</span></h1>
-                <p>Enterprise-grade extraction with semantic RAG chunking and priority scoring. Built for LLMs, AI agents, and vector databases.</p>
-                <div style="max-width: 300px;">
-                    <a href="#pricing" class="btn btn-primary">Get API Key</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <img src="SinyxHero.png" alt="Sinyx Terminal Transformation">
-            </div>
-        </section>
-
-        <!-- Interactive Playground -->
-        <section id="demo" class="demo-section">
-            <span class="section-label">Interactive Playground</span>
-            <h2>Try it instantly.</h2>
-            <div class="demo-box">
-                <div class="demo-input-group">
-                    <input type="url" id="demo-url" placeholder="Paste any article URL..." autocomplete="url" required>
-                </div>
-                <div class="demo-controls">
-                    <select id="demo-format">
-                        <option value="markdown">📝 Markdown</option>
-                        <option value="chunks">🧠 RAG Chunks</option>
-                        <option value="text">📄 Plain Text</option>
-                        <option value="html">🔗 Raw HTML</option>
-                        <option value="full">📊 Full (with metadata)</option>
-                    </select>
-                    <button class="btn btn-primary demo-btn" id="demo-btn" disabled>Extract</button>
-                </div>
-                
-                <div class="cf-turnstile-wrapper">
-                    <!-- Cloudflare Turnstile -->
-                    <div
-                        class="cf-turnstile"
-                        data-sitekey="0x4AAAAAADDKt22l6jVfuFID"
-                        data-theme="dark"
-                        data-size="flexible"
-                        data-callback="sinyxTurnstileSuccess"
-                        data-expired-callback="sinyxTurnstileExpired"
-                        data-error-callback="sinyxTurnstileError"></div>
-                </div>
-                <div id="demo-status" class="demo-status" role="status" aria-live="polite">Verify to run the demo.</div>
-
-                <div id="demo-output-container" class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:500px; overflow-y:auto;">
-                    <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-                    <pre><code id="demo-output" style="color: #a7f3d0;">Awaiting url...</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="feature-card" style="border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.03);">
-                <h3>🧠 RAG-Ready Chunks</h3>
-                <p>Semantic chunking with heading breadcrumbs and priority scoring. Feed directly into vector databases—no preprocessing needed. Each chunk gets a 0.0–1.0 relevance score.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🛡️ SSRF Protected</h3>
-                <p>Built for production. We automatically block internal network requests and localhost lookups, shielding your infrastructure from Server-Side Request Forgery.</p>
-            </div>
-            <div class="feature-card">
-                <h3>⚡ Graceful Batching</h3>
-                <p>Process up to 5 URLs concurrently. If one URL throws a 404, it doesn't fail the batch—your successful extractions are still delivered.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🎯 Precision Targeting</h3>
-                <p>Need exactly one specific article section? Pass a CSS selector and Sinyx will extract only that block, ignoring the rest of the DOM.</p>
-            </div>
-        </section>
-
-        <section id="pricing">
-            <span class="section-label">Transparent Pricing</span>
-            <h2>Choose your scale.</h2>
-            <div class="pricing-grid">
-                <!-- FREE -->
-                <div class="pricing-card">
-                    <h3>Eval</h3>
-                    <div class="price">$0<span>/mo</span></div>
-                    <p>Perfect for testing ideas.</p>
-                    <ul class="pricing-features">
-                        <li>50 requests / month</li>
-                        <li>All output formats</li>
-                        <li>Standard priority</li>
-                    </ul>
-                    <a href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" class="btn btn-secondary">Get Started</a>
-                </div>
-                <!-- PRO -->
-                <div class="pricing-card popular">
-                    <span style="position:absolute; top:-12px; right:20px; background:var(--accent-purple); color:white; padding:4px 12px; border-radius:20px; font-size:0.7rem; font-weight:700;">MOST POPULAR</span>
-                    <h3>Pro</h3>
-                    <div class="price">$29<span>/mo</span></div>
-                    <p>For production AI apps.</p>
-                    <ul class="pricing-features">
-                        <li>20,000 requests / month</li>
-                        <li>High priority support</li>
-                        <li>1000 req/hour rate limit</li>
-                    </ul>
-                    <a href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" class="btn btn-primary">Upgrade to Pro</a>
-                </div>
-                <!-- ULTRA -->
-                <div class="pricing-card">
-                    <h3>Ultra</h3>
-                    <div class="price">$99<span>/mo</span></div>
-                    <p>For high-volume scraping.</p>
-                    <ul class="pricing-features">
-                        <li>100,000 requests / month</li>
-                        <li>Dedicated extraction slots</li>
-                        <li>Direct founder support</li>
-                    </ul>
-                    <a href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" class="btn btn-secondary">Go Ultra</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="code-window">
-            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">curl</span> <span class="keyword">--request</span> <span class="method">POST</span> https://sinyx.p.rapidapi.com/v1/extract \
-  <span class="keyword">-H</span> <span class="string">"x-rapidapi-host: sinyx.p.rapidapi.com"</span> \
-  <span class="keyword">-H</span> <span class="string">"x-rapidapi-key: YOUR_RAPIDAPI_KEY"</span> \
-  <span class="keyword">-d</span> <span class="string">'{"url": "https://sinyx.me"}'</span></code></pre>
+        <div class="proof-panel" aria-label="Example extraction output">
+          <div class="proof-header">
+            <span>POST /v1/extract</span>
+            <span>200 OK</span>
+          </div>
+          <pre><code>{
+  "success": true,
+  "format": "chunks",
+  "title": "AI Infrastructure Guide",
+  "chunks": [
+    {
+      "headingPath": "Root > Setup",
+      "priority": 0.82,
+      "content": "Clean, structured output..."
+    }
+  ]
+}</code></pre>
         </div>
-    </main>
+      </div>
+    </section>
 
-    <footer id="contact">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h3>Sinyx</h3>
-                <p>Web content extraction for AI. Markdown, text, HTML, and semantic chunks — from any URL, for any pipeline.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank">Pricing</a></li>
-                    <li><a href="docs.html">API Documentation</a></li>
-                    <li><a href="tos.html">Terms of Service</a></li>
-                    <li><a href="mailto:ibasitkhan.98@gmail.com">Contact Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Socials</h4>
-                <ul>
-                    <li><a href="https://github.com/imbasito" target="_blank">GitHub</a></li>
-                    <li><a href="https://www.linkedin.com/in/imbasito" target="_blank">LinkedIn</a></li>
-                </ul>
-            </div>
+    <section id="demo" class="demo-section section-band">
+      <div class="shell split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Live product proof</p>
+          <h2>Extract a real page.</h2>
+          <p>Paste a public URL, verify, and inspect the output. The demo is intentionally limited, but it uses the same extraction path as the API.</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Sinyx API. All rights reserved.</p>
-        </div>
-    </footer>
 
-    <script src="script.js" defer></script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+        <div class="demo-surface">
+          <div class="demo-input-group">
+            <input type="url" id="demo-url" placeholder="https://example.com/article" autocomplete="url" required>
+          </div>
+          <div class="demo-controls">
+            <select id="demo-format" aria-label="Output format">
+              <option value="markdown">Markdown</option>
+              <option value="chunks">RAG chunks</option>
+              <option value="text">Plain text</option>
+              <option value="html">HTML</option>
+              <option value="full">Full response</option>
+            </select>
+            <button class="button button-primary demo-btn" id="demo-btn" disabled>Extract</button>
+          </div>
+
+          <div class="cf-turnstile-wrapper">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAADDKt22l6jVfuFID"
+              data-theme="light"
+              data-size="flexible"
+              data-callback="sinyxTurnstileSuccess"
+              data-expired-callback="sinyxTurnstileExpired"
+              data-error-callback="sinyxTurnstileError"></div>
+          </div>
+          <div id="demo-status" class="demo-status" role="status" aria-live="polite">Verify to run the demo.</div>
+
+          <div id="demo-output-container" class="output-panel">
+            <div class="output-header">
+              <span>response</span>
+              <span>structured output</span>
+            </div>
+            <pre><code id="demo-output">Awaiting URL...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="security" class="shell trust-grid">
+      <article>
+        <span class="metric">SSRF</span>
+        <h3>Network-aware by default.</h3>
+        <p>Private IP ranges, local hostnames, metadata endpoints, protocol abuse, and redirect rebinding are blocked before extraction.</p>
+      </article>
+      <article>
+        <span class="metric">5 MB</span>
+        <h3>Bounded fetches.</h3>
+        <p>HEAD checks, content-type validation, redirect limits, timeouts, and content caps keep the service predictable.</p>
+      </article>
+      <article>
+        <span class="metric">5 URLs</span>
+        <h3>Batch without fragility.</h3>
+        <p>Batch extraction processes multiple URLs while preserving partial success when individual pages fail.</p>
+      </article>
+      <article>
+        <span class="metric">4 formats</span>
+        <h3>AI-ready outputs.</h3>
+        <p>Markdown, plain text, readable HTML, and semantic chunks support LLM prompts, RAG ingestion, search, and automation workflows.</p>
+      </article>
+    </section>
+
+    <section id="formats" class="section-band">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Output formats</p>
+          <h2>One endpoint, multiple workflow shapes.</h2>
+        </div>
+        <div class="format-grid">
+          <article>
+            <h3>Markdown</h3>
+            <p>Clean formatting for LLM context windows and developer tooling.</p>
+          </article>
+          <article>
+            <h3>Text</h3>
+            <p>Plain content for embeddings, search, and downstream parsing.</p>
+          </article>
+          <article>
+            <h3>HTML</h3>
+            <p>Readable extracted markup when you need structure preserved.</p>
+          </article>
+          <article>
+            <h3>Chunks</h3>
+            <p>Semantic blocks with heading paths, character counts, and priority scores.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell final-cta">
+      <h2>Build on cleaner web content.</h2>
+      <p>Start with the demo, then move into the API when you are ready to wire Sinyx into production workflows.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#demo">Try the product</a>
+        <a class="button button-secondary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Platform</h4>
+        <a href="#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,30 @@
+# Sinyx
+
+Sinyx is a web content infrastructure API for AI workflows.
+It converts public web pages into Markdown, plain text, readable HTML, full metadata, and semantic chunks.
+
+## Primary Pages
+
+- Homepage: https://sinyx.me/
+- API docs: https://sinyx.me/docs
+- Pricing: https://sinyx.me/pricing
+- Terms of Service: https://sinyx.me/tos
+- Privacy Policy: https://sinyx.me/privacy
+
+## API Access
+
+API keys, subscriptions, usage limits, and billing are managed through RapidAPI:
+https://rapidapi.com/ibasitkhan98/api/sinyx/pricing
+
+## Core Endpoints
+
+- POST https://sinyx.p.rapidapi.com/v1/extract
+- POST https://sinyx.p.rapidapi.com/v1/extract/batch
+
+## Output Formats
+
+- markdown
+- text
+- html
+- full
+- chunks

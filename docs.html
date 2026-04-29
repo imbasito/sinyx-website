@@ -1,384 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation — Sinyx</title>
-    <link rel="icon" type="image/png" href="URL_to_Markdown.png">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --bg-dark: #0A0A0A;
-        --text-main: #E2E8F0;
-        --accent-purple: #8b5cf6;
-        --accent-blue: #3b82f6;
-        --card-bg: rgba(255, 255, 255, 0.03);
-        --card-border: rgba(255, 255, 255, 0.1);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - Sinyx</title>
+  <meta name="description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/docs">
+  <meta property="og:title" content="Documentation - Sinyx">
+  <meta property="og:description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sinyx.me/docs">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Sinyx API Documentation",
+      "description": "Sinyx API documentation for extracting web content into AI-ready formats.",
+      "url": "https://sinyx.me/docs",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sinyx",
+        "url": "https://sinyx.me/"
       }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      
-      html {
-        scroll-padding-top: 100px;
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        font-family: 'Outfit', sans-serif;
-        background-color: var(--bg-dark);
-        color: var(--text-main);
-        overflow-x: hidden;
-        line-height: 1.6;
-      }
-
-      .glow-bg {
-        position: absolute;
-        width: 800px;
-        height: 800px;
-        background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(59,130,246,0.05) 40%, transparent 70%);
-        top: -200px;
-        right: -200px;
-        z-index: -1;
-        border-radius: 50%;
-        filter: blur(80px);
-      }
-
-      /* Navigation */
-      nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        backdrop-filter: blur(12px);
-        background: rgba(10, 10, 10, 0.8);
-        border-bottom: 1px solid var(--card-border);
-        z-index: 1000;
-      }
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo {
-        font-weight: 800;
-        font-size: 1.5rem;
-        background: linear-gradient(90deg, #fff, var(--accent-purple));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-decoration: none;
-      }
-      .nav-links { display: flex; gap: 2rem; }
-      .nav-links a {
-        color: #9ca3af;
-        text-decoration: none;
-        font-size: 0.95rem;
-        transition: color 0.3s;
-      }
-      .nav-links a:hover { color: #fff; }
-
-      /* Doc Container */
-      .doc-container {
-        max-width: 900px;
-        margin: 8rem auto 4rem;
-        padding: 0 2rem;
-        min-height: 60vh;
-      }
-      h1 { font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: -1px; }
-      h2 { font-size: 2rem; margin: 4rem 0 1.5rem; color: #fff; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
-      p { font-size: 1.1rem; color: #9ca3af; margin-bottom: 1.5rem; font-weight: 300; }
-      
-      .endpoint {
-        display: flex; align-items: center; gap: 1rem;
-        background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--card-border);
-        font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;
-        margin-bottom: 2rem;
-      }
-      .method-badge {
-        background: rgba(59, 130, 246, 0.2); color: var(--accent-blue);
-        padding: 0.4rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem;
-      }
-
-      /* Tables */
-      table { width: 100%; border-collapse: collapse; margin-bottom: 3rem; background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); }
-      th, td { padding: 1.5rem; text-align: left; border-bottom: 1px solid var(--card-border); }
-      th { color: #fff; font-weight: 600; background: rgba(255,255,255,0.02); }
-      td:last-child, th:last-child { border-right: none; }
-      tr:last-child td { border-bottom: none; }
-      td code { background: rgba(255,255,255,0.1); padding: 0.3rem 0.6rem; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent-purple); }
-
-      /* Code Blocks */
-      .code-window {
-        background: rgba(15, 15, 15, 0.8);
-        border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 3rem; overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      }
-      .code-header { background: rgba(30, 30, 30, 0.9); padding: 1rem 1.5rem; display: flex; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-      .dot { width: 12px; height: 12px; border-radius: 50%; }
-      .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
-      pre { padding: 2rem 2.5rem; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; color: #e2e8f0; line-height: 1.7; }
-      .keyword { color: var(--accent-purple); font-weight: bold; }
-      .string { color: #a7f3d0; }
-      .method { color: var(--accent-blue); }
-
-      /* Footer */
-      footer {
-        border-top: 1px solid var(--card-border);
-        padding: 6rem 2rem 2rem 2rem;
-        background: #050505;
-      }
-      .footer-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 4rem;
-        margin-bottom: 4rem;
-      }
-      .footer-brand h3 {
-        font-weight: 800;
-        font-size: 1.5rem;
-        background: linear-gradient(90deg, #fff, var(--accent-purple));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
-      }
-      .footer-brand p { color: #9ca3af; font-size: 0.95rem; max-width: 300px; }
-      .footer-links h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1rem; }
-      .footer-links ul { list-style: none; }
-      .footer-links li { margin-bottom: 0.8rem; }
-      .footer-links a { color: #9ca3af; text-decoration: none; transition: color 0.3s; font-size: 0.95rem; }
-      .footer-links a:hover { color: #fff; text-decoration: underline; }
-      .footer-bottom {
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
-        color: #6b7280;
-        font-size: 0.9rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--card-border);
-      }
-
-      @media (max-width: 900px) {
-        .footer-grid { grid-template-columns: 1fr; }
-        .nav-links { gap: 1rem; }
-      }
-    </style>
+    }
+  </script>
 </head>
 <body>
-    <div class="glow-bg"></div>
-    
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo" style="display:flex; align-items:center;">
-                <img src="URL_to_Markdown.png" alt="Sinyx Logo" height="32" style="margin-right: 12px; border-radius: 4px;">
-                Sinyx
-            </a>
-            <div class="nav-links">
-                <a href="index.html#features">Features</a>
-                <a href="index.html#pricing">Pricing</a>
-                <a href="docs.html">Docs</a>
-                <a href="index.html#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/tos">Terms of Service</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
 
-    <main class="doc-container">
-        <h1>API Reference</h1>
-        <p>Use the Sinyx API to cleanly extract public web content into Markdown, plain text, cleaned HTML, or semantic chunks for LLM and RAG pipelines.</p>
+  <main class="doc-layout shell">
+    <header class="doc-hero">
+      <p class="eyebrow">API reference</p>
+      <h1>Extract clean AI-ready content from public URLs.</h1>
+      <p>Sinyx returns Markdown, text, HTML, full metadata, or semantic chunks from a single extraction pipeline.</p>
+    </header>
 
-        <h2>Authentication</h2>
-        <p>The API is syndicated through RapidAPI. To authenticate, pass your RapidAPI key and host headers with each request.</p>
-        
-        <h2>Extraction Endpoint</h2>
-        <div class="endpoint">
-            <div class="method-badge">POST</div>
-            <div>https://sinyx.p.rapidapi.com/v1/extract</div>
-        </div>
+    <section class="doc-section">
+      <h2>Authentication</h2>
+      <p>The API is distributed through RapidAPI. Send your RapidAPI key and host headers with each request.</p>
+      <pre><code>x-rapidapi-host: sinyx.p.rapidapi.com
+x-rapidapi-key: YOUR_KEY</code></pre>
+    </section>
 
-        <h2>Request Body Details</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Parameter (JSON)</th>
-                    <th>Type</th>
-                    <th>Required</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>url</code></td>
-                    <td>String</td>
-                    <td>Yes</td>
-                    <td>The public HTTP or HTTPS URL to extract. For batching, use <code>/v1/extract/batch</code> with <code>urls</code>.</td>
-                </tr>
-                <tr>
-                    <td><code>selector</code></td>
-                    <td>String</td>
-                    <td>No</td>
-                    <td>A CSS selector to precision-target specific DOM content (e.g. <code>.article-body</code>).</td>
-                </tr>
-                <tr>
-                    <td><code>format</code></td>
-                    <td>String</td>
-                    <td>No</td>
-                    <td>Output format. Options: <code>markdown</code>, <code>text</code>, <code>html</code>, <code>full</code>, <code>chunks</code>. Default: <code>full</code>.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>Code Example: Single URL (cURL)</h2>
-        <div class="code-window">
-            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">curl</span> --request POST \
-  --url https://sinyx.p.rapidapi.com/v1/extract/batch \
-  --header <span class="string">'Content-Type: application/json'</span> \
-  --header <span class="string">'x-rapidapi-host: sinyx.p.rapidapi.com'</span> \
-  --header <span class="string">'x-rapidapi-key: YOUR_KEY'</span> \
-  --data <span class="string">'{
-    "url": "https://sinyx.me",
-    "format": "markdown"
-}'</span></code></pre>
-        </div>
-
-        <h2>Code Example: Batch Processing (cURL)</h2>
-        <p>Extract up to 5 URLs in parallel. If one fails, the others still succeed.</p>
-        <div class="code-window">
-            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">curl</span> --request POST \
+    <section class="doc-section">
+      <h2>Single extraction</h2>
+      <div class="endpoint-row">
+        <span>POST</span>
+        <code>https://sinyx.p.rapidapi.com/v1/extract</code>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>url</code></td>
+            <td>String</td>
+            <td>Yes</td>
+            <td>Public HTTP or HTTPS URL to extract.</td>
+          </tr>
+          <tr>
+            <td><code>format</code></td>
+            <td>String</td>
+            <td>No</td>
+            <td><code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, or <code>chunks</code>.</td>
+          </tr>
+          <tr>
+            <td><code>selector</code></td>
+            <td>String</td>
+            <td>No</td>
+            <td>Optional CSS selector for targeted extraction.</td>
+          </tr>
+        </tbody>
+      </table>
+      <pre><code>curl --request POST \
   --url https://sinyx.p.rapidapi.com/v1/extract \
-  --header <span class="string">'Content-Type: application/json'</span> \
-  --header <span class="string">'x-rapidapi-host: sinyx.p.rapidapi.com'</span> \
-  --header <span class="string">'x-rapidapi-key: YOUR_KEY'</span> \
-  --data <span class="string">'{
+  --header 'Content-Type: application/json' \
+  --header 'x-rapidapi-host: sinyx.p.rapidapi.com' \
+  --header 'x-rapidapi-key: YOUR_KEY' \
+  --data '{
+    "url": "https://example.com/article",
+    "format": "markdown"
+  }'</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>Batch extraction</h2>
+      <div class="endpoint-row">
+        <span>POST</span>
+        <code>https://sinyx.p.rapidapi.com/v1/extract/batch</code>
+      </div>
+      <p>Process up to five URLs concurrently. Individual URL failures are returned alongside successful results.</p>
+      <pre><code>curl --request POST \
+  --url https://sinyx.p.rapidapi.com/v1/extract/batch \
+  --header 'Content-Type: application/json' \
+  --header 'x-rapidapi-host: sinyx.p.rapidapi.com' \
+  --header 'x-rapidapi-key: YOUR_KEY' \
+  --data '{
     "urls": ["https://apple.com", "https://github.com"],
     "format": "markdown"
-}'</span></code></pre>
-        </div>
+  }'</code></pre>
+    </section>
 
-        <h2>Code Example: Batch Processing (Python)</h2>
-        <div class="code-window">
-            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">import</span> requests
+    <section class="doc-section">
+      <h2>Chunks schema</h2>
+      <p>Use <code>format: "chunks"</code> when you want semantic blocks ready for retrieval or vector storage.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>chunkIndex</code></td>
+            <td>Number</td>
+            <td>Sequential position in the extracted document.</td>
+          </tr>
+          <tr>
+            <td><code>headingPath</code></td>
+            <td>String</td>
+            <td>Breadcrumb path for the content block.</td>
+          </tr>
+          <tr>
+            <td><code>content</code></td>
+            <td>String</td>
+            <td>Plain text content for the chunk.</td>
+          </tr>
+          <tr>
+            <td><code>priority</code></td>
+            <td>Number</td>
+            <td>Relevance score from <code>0.0</code> to <code>1.0</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 
-url = <span class="string">"https://sinyx.p.rapidapi.com/v1/extract/batch"</span>
-payload = { 
-    <span class="string">"urls"</span>: [
-        <span class="string">"https://apple.com"</span>,
-        <span class="string">"https://github.com"</span>
-    ],
-    <span class="string">"format"</span>: <span class="string">"markdown"</span>
-}
-headers = {
-    <span class="string">"x-rapidapi-key"</span>: <span class="string">"YOUR_KEY"</span>,
-    <span class="string">"x-rapidapi-host"</span>: <span class="string">"sinyx.p.rapidapi.com"</span>,
-    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
-}
-
-response = requests.post(url, json=payload, headers=headers)
-<span class="keyword">print</span>(response.json())</code></pre>
-        </div>
-
-        <h2>RAG Chunks Format</h2>
-        <p>Set <code>format: "chunks"</code> to receive semantically segmented content with heading breadcrumbs and priority scoring. Each chunk is a self-contained block ready for vector database ingestion.</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>chunkIndex</code></td>
-                    <td>Number</td>
-                    <td>Sequential index (0, 1, 2...) for ordering chunks.</td>
-                </tr>
-                <tr>
-                    <td><code>headingPath</code></td>
-                    <td>String</td>
-                    <td>Hierarchical breadcrumb of the chunk's position, e.g. <code>Root > Setup > Installation</code>.</td>
-                </tr>
-                <tr>
-                    <td><code>headingLevel</code></td>
-                    <td>Number</td>
-                    <td>The heading depth (2 = H2, 3 = H3, etc.). Root-level content is <code>0</code>.</td>
-                </tr>
-                <tr>
-                    <td><code>content</code></td>
-                    <td>String</td>
-                    <td>The extracted plain-text content of this chunk.</td>
-                </tr>
-                <tr>
-                    <td><code>charCount</code></td>
-                    <td>Number</td>
-                    <td>Character count of the content.</td>
-                </tr>
-                <tr>
-                    <td><code>priority</code></td>
-                    <td>Number</td>
-                    <td>Relevance score from <code>0.0</code> (noise, e.g. footer) to <code>1.0</code> (high-value, e.g. definitions). Use this to filter or sort chunks before sending to your LLM.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>Code Example: RAG Chunks (Python)</h2>
-        <p>Extract semantically chunked content and filter by priority for your RAG pipeline.</p>
-        <div class="code-window">
-            <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">import</span> requests
-
-url = <span class="string">"https://sinyx.p.rapidapi.com/v1/extract"</span>
-payload = { 
-    <span class="string">"url"</span>: <span class="string">"https://en.wikipedia.org/wiki/Artificial_intelligence"</span>,
-    <span class="string">"format"</span>: <span class="string">"chunks"</span>
-}
-headers = {
-    <span class="string">"x-rapidapi-key"</span>: <span class="string">"YOUR_KEY"</span>,
-    <span class="string">"x-rapidapi-host"</span>: <span class="string">"sinyx.p.rapidapi.com"</span>,
-    <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
-}
-
-response = requests.post(url, json=payload, headers=headers)
-data = response.json()
-
-<span class="keyword"># Filter high-value chunks for your vector DB</span>
-high_value = [c <span class="keyword">for</span> c <span class="keyword">in</span> data[<span class="string">"chunks"</span>] <span class="keyword">if</span> c[<span class="string">"priority"</span>] >= 0.6]
-
-<span class="keyword">for</span> chunk <span class="keyword">in</span> high_value:
-    <span class="keyword">print</span>(f"{chunk[<span class="string">'headingPath'</span>]} → {chunk[<span class="string">'content'</span>][:80]}...")</code></pre>
-        </div>
-    </main>
-
-    <footer id="contact">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h3>Sinyx</h3>
-                <p>Web content extraction for AI. Markdown, text, HTML, and semantic chunks — from any URL, for any pipeline.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="index.html#pricing">Pricing</a></li>
-                    <li><a href="docs.html">API Documentation</a></li>
-                    <li><a href="tos.html">Terms of Service</a></li>
-                    <li><a href="mailto:ibasitkhan.98@gmail.com">Contact Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Socials</h4>
-                <ul>
-                    <li><a href="https://github.com/imbasito" target="_blank">GitHub</a></li>
-                    <li><a href="https://www.linkedin.com/in/imbasito" target="_blank">LinkedIn</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Sinyx API. All rights reserved.</p>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Platform</h4>
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>

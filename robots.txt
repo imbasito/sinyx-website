@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sinyx.me/sitemap.xml
+
+LLMs: https://sinyx.me/llms.txt

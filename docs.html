@@ -186,15 +186,15 @@
 
     <main class="doc-container">
         <h1>API Reference</h1>
-        <p>Use the Sinyx API to cleanly extract article content and convert it to formatting-preserved Markdown for LLMs and Data Pipelines.</p>
+        <p>Use the Sinyx API to cleanly extract public web content into Markdown, plain text, cleaned HTML, or semantic chunks for LLM and RAG pipelines.</p>
 
         <h2>Authentication</h2>
-        <p>The API is syndicated through RapidAPI. To authenticate, you must pass your unique RapidAPI key in the headers.</p>
+        <p>The API is syndicated through RapidAPI. To authenticate, pass your RapidAPI key and host headers with each request.</p>
         
         <h2>Extraction Endpoint</h2>
         <div class="endpoint">
             <div class="method-badge">POST</div>
-            <div>https://url-to-markdown2.p.rapidapi.com/v1/extract</div>
+            <div>https://sinyx.p.rapidapi.com/v1/extract</div>
         </div>
 
         <h2>Request Body Details</h2>
@@ -210,9 +210,9 @@
             <tbody>
                 <tr>
                     <td><code>url</code></td>
-                    <td>String | Array</td>
+                    <td>String</td>
                     <td>Yes</td>
-                    <td>The absolute target URL(s) to scrape. Pass an array for concurrent batching (max 5).</td>
+                    <td>The public HTTP or HTTPS URL to extract. For batching, use <code>/v1/extract/batch</code> with <code>urls</code>.</td>
                 </tr>
                 <tr>
                     <td><code>selector</code></td>
@@ -233,9 +233,9 @@
         <div class="code-window">
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
             <pre><code><span class="keyword">curl</span> --request POST \
-  --url https://url-to-markdown2.p.rapidapi.com/v1/extract \
+  --url https://sinyx.p.rapidapi.com/v1/extract/batch \
   --header <span class="string">'Content-Type: application/json'</span> \
-  --header <span class="string">'x-rapidapi-host: url-to-markdown2.p.rapidapi.com'</span> \
+  --header <span class="string">'x-rapidapi-host: sinyx.p.rapidapi.com'</span> \
   --header <span class="string">'x-rapidapi-key: YOUR_KEY'</span> \
   --data <span class="string">'{
     "url": "https://sinyx.me",
@@ -248,12 +248,12 @@
         <div class="code-window">
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
             <pre><code><span class="keyword">curl</span> --request POST \
-  --url https://url-to-markdown2.p.rapidapi.com/v1/extract \
+  --url https://sinyx.p.rapidapi.com/v1/extract \
   --header <span class="string">'Content-Type: application/json'</span> \
-  --header <span class="string">'x-rapidapi-host: url-to-markdown2.p.rapidapi.com'</span> \
+  --header <span class="string">'x-rapidapi-host: sinyx.p.rapidapi.com'</span> \
   --header <span class="string">'x-rapidapi-key: YOUR_KEY'</span> \
   --data <span class="string">'{
-    "url": ["https://apple.com", "https://github.com"], 
+    "urls": ["https://apple.com", "https://github.com"],
     "format": "markdown"
 }'</span></code></pre>
         </div>
@@ -263,9 +263,9 @@
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
             <pre><code><span class="keyword">import</span> requests
 
-url = <span class="string">"https://url-to-markdown2.p.rapidapi.com/v1/extract"</span>
+url = <span class="string">"https://sinyx.p.rapidapi.com/v1/extract/batch"</span>
 payload = { 
-    <span class="string">"url"</span>: [
+    <span class="string">"urls"</span>: [
         <span class="string">"https://apple.com"</span>,
         <span class="string">"https://github.com"</span>
     ],
@@ -273,7 +273,7 @@ payload = {
 }
 headers = {
     <span class="string">"x-rapidapi-key"</span>: <span class="string">"YOUR_KEY"</span>,
-    <span class="string">"x-rapidapi-host"</span>: <span class="string">"url-to-markdown2.p.rapidapi.com"</span>,
+    <span class="string">"x-rapidapi-host"</span>: <span class="string">"sinyx.p.rapidapi.com"</span>,
     <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
 }
 
@@ -331,14 +331,14 @@ response = requests.post(url, json=payload, headers=headers)
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
             <pre><code><span class="keyword">import</span> requests
 
-url = <span class="string">"https://url-to-markdown2.p.rapidapi.com/v1/extract"</span>
+url = <span class="string">"https://sinyx.p.rapidapi.com/v1/extract"</span>
 payload = { 
     <span class="string">"url"</span>: <span class="string">"https://en.wikipedia.org/wiki/Artificial_intelligence"</span>,
     <span class="string">"format"</span>: <span class="string">"chunks"</span>
 }
 headers = {
     <span class="string">"x-rapidapi-key"</span>: <span class="string">"YOUR_KEY"</span>,
-    <span class="string">"x-rapidapi-host"</span>: <span class="string">"url-to-markdown2.p.rapidapi.com"</span>,
+    <span class="string">"x-rapidapi-host"</span>: <span class="string">"sinyx.p.rapidapi.com"</span>,
     <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
 }
 

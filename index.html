@@ -70,7 +70,7 @@
         -webkit-text-fill-color: transparent;
         text-decoration: none;
       }
-      .nav-links { display: flex; gap: 2rem; }
+      .nav-links { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-end; }
       .nav-links a {
         color: #9ca3af;
         text-decoration: none;
@@ -264,8 +264,32 @@
         color: #fff;
       }
       .demo-btn { width: auto; padding: 1rem 2rem; white-space: nowrap; cursor: pointer; border: none; font-size: 1rem; }
-      @media (max-width: 600px) { .demo-input-group { flex-direction: column; } .demo-btn { width: 100%; } .demo-controls { flex-direction: column; } }
-      .cf-turnstile-wrapper { display: flex; justify-content: center; margin-bottom: 1rem; }
+      .demo-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+      @media (max-width: 600px) {
+        .nav-container { align-items: flex-start; gap: 1rem; }
+        .nav-links { gap: 0.8rem 1rem; }
+        .demo-section { padding: 0 1rem; }
+        .demo-box { padding: 1.25rem; }
+        .demo-input-group { flex-direction: column; }
+        .demo-btn { width: 100%; }
+        .demo-controls { flex-direction: column; }
+      }
+      .cf-turnstile-wrapper {
+        display: flex;
+        justify-content: center;
+        max-width: 100%;
+        min-height: 70px;
+        margin: 0 auto 1.25rem;
+      }
+      .cf-turnstile { max-width: 100%; }
+      .demo-status {
+        min-height: 1.4rem;
+        margin-bottom: 1rem;
+        color: #9ca3af;
+        font-size: 0.95rem;
+      }
+      .demo-status.error { color: #fca5a5; }
+      .demo-status.success { color: #a7f3d0; }
 
       /* Chunk Cards */
       .chunks-container { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; }
@@ -383,7 +407,7 @@
             <h2>Try it instantly.</h2>
             <div class="demo-box">
                 <div class="demo-input-group">
-                    <input type="url" id="demo-url" placeholder="Paste any article URL..." required>
+                    <input type="url" id="demo-url" placeholder="Paste any article URL..." autocomplete="url" required>
                 </div>
                 <div class="demo-controls">
                     <select id="demo-format">
@@ -393,13 +417,21 @@
                         <option value="html">🔗 Raw HTML</option>
                         <option value="full">📊 Full (with metadata)</option>
                     </select>
-                    <button class="btn btn-primary demo-btn" id="demo-btn">Extract</button>
+                    <button class="btn btn-primary demo-btn" id="demo-btn" disabled>Extract</button>
                 </div>
                 
                 <div class="cf-turnstile-wrapper">
                     <!-- Cloudflare Turnstile -->
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAADDKt22l6jVfuFID"></div>
+                    <div
+                        class="cf-turnstile"
+                        data-sitekey="0x4AAAAAADDKt22l6jVfuFID"
+                        data-theme="dark"
+                        data-size="flexible"
+                        data-callback="sinyxTurnstileSuccess"
+                        data-expired-callback="sinyxTurnstileExpired"
+                        data-error-callback="sinyxTurnstileError"></div>
                 </div>
+                <div id="demo-status" class="demo-status" role="status" aria-live="polite">Verify to run the demo.</div>
 
                 <div id="demo-output-container" class="code-window" style="margin: 1rem auto 0; text-align:left; max-height:500px; overflow-y:auto;">
                     <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
@@ -474,8 +506,8 @@
 
         <div class="code-window">
             <div class="code-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
-            <pre><code><span class="keyword">curl</span> <span class="keyword">--request</span> <span class="method">POST</span> https://url-to-markdown2.p.rapidapi.com/v1/extract \
-  <span class="keyword">-H</span> <span class="string">"x-rapidapi-host: url-to-markdown2.p.rapidapi.com"</span> \
+            <pre><code><span class="keyword">curl</span> <span class="keyword">--request</span> <span class="method">POST</span> https://sinyx.p.rapidapi.com/v1/extract \
+  <span class="keyword">-H</span> <span class="string">"x-rapidapi-host: sinyx.p.rapidapi.com"</span> \
   <span class="keyword">-H</span> <span class="string">"x-rapidapi-key: YOUR_RAPIDAPI_KEY"</span> \
   <span class="keyword">-d</span> <span class="string">'{"url": "https://sinyx.me"}'</span></code></pre>
         </div>
@@ -509,7 +541,7 @@
         </div>
     </footer>
 
+    <script src="script.js" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
-    <script src="script.js"></script>
 </body>
 </html>

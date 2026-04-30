@@ -337,6 +337,10 @@ code {
   border: 1px solid var(--border);
 }
 
+.trust-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .metric {
   color: var(--brand);
   font-family: var(--mono);

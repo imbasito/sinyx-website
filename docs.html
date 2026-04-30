@@ -169,7 +169,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
 
     <section class="doc-section" id="mcp">
       <h2>MCP for AI tools</h2>
-      <p>Sinyx also ships as a local MCP server for AI clients that support tools. The MCP server calls the same RapidAPI endpoint, so users keep their existing RapidAPI key and plan.</p>
+      <p>Sinyx also ships as a local MCP server for AI clients that support tools, including Codex, Claude Code, Cursor, and Windsurf. The MCP server calls the same RapidAPI endpoint, so users keep their existing RapidAPI key and plan.</p>
       <p>Replace <code>/absolute/path/to/sinyx-mcp/src/index.js</code> with the local path where you cloned the MCP package.</p>
       <div class="endpoint-row">
         <span>TOOL</span>
@@ -205,7 +205,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
       "args": ["/absolute/path/to/sinyx-mcp/src/index.js"],
       "env": {
         "SINYX_API_BASE_URL": "https://sinyx.p.rapidapi.com",
-        "SINYX_API_KEY": "YOUR_RAPIDAPI_KEY",
+        "SINYX_API_KEY": "your-rapidapi-key",
         "SINYX_API_KEY_HEADER": "x-rapidapi-key",
         "SINYX_RAPIDAPI_HOST": "sinyx.p.rapidapi.com"
       }

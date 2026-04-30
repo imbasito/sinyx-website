@@ -353,9 +353,33 @@ code {
 }
 
 .format-grid {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   padding: 0;
   gap: 20px;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.8fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.agent-card {
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(231, 237, 246, 0.88));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 22px 54px rgba(20, 42, 76, 0.1);
+}
+
+.agent-card pre {
+  margin: 0;
+  padding: 24px;
+  overflow-x: auto;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
 }
 
 .final-cta {
@@ -569,6 +593,7 @@ td {
 
   .hero-grid,
   .split-section,
+  .agent-grid,
   .pricing-grid,
   .footer-grid {
     grid-template-columns: 1fr;

@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Documentation - Sinyx</title>
-  <meta name="description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta name="description" content="Sinyx API and MCP documentation for extracting web content into AI-ready formats.">
   <meta name="theme-color" content="#142A4C">
   <link rel="canonical" href="https://sinyx.me/docs">
   <meta property="og:title" content="Documentation - Sinyx">
-  <meta property="og:description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta property="og:description" content="Sinyx API and MCP documentation for extracting web content into AI-ready formats.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://sinyx.me/docs">
   <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
@@ -26,7 +26,7 @@
       "@context": "https://schema.org",
       "@type": "TechArticle",
       "headline": "Sinyx API Documentation",
-      "description": "Sinyx API documentation for extracting web content into AI-ready formats.",
+      "description": "Sinyx API and MCP documentation for extracting web content into AI-ready formats.",
       "url": "https://sinyx.me/docs",
       "publisher": {
         "@type": "Organization",
@@ -169,7 +169,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
 
     <section class="doc-section" id="mcp">
       <h2>MCP for AI tools</h2>
-      <p>Sinyx also ships as an MCP server for AI clients that support tools, including Codex, Claude Code, Cursor, and Windsurf. The MCP server calls the same RapidAPI endpoint, so users keep their existing RapidAPI key and plan.</p>
+      <p>Sinyx also ships as an npm-installable MCP server for AI clients that support tools, including Codex, Claude Code, Cursor, and Windsurf. The MCP server calls the same RapidAPI endpoint, so users keep their existing RapidAPI key and plan.</p>
       <p>Use <code>npx -y sinyx-mcp</code> for the easiest setup. Local clone paths are only needed when developing the MCP package itself.</p>
       <div class="endpoint-row">
         <span>TOOL</span>
@@ -212,6 +212,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
     }
   }
 }</code></pre>
+      <p>Package: <a href="https://www.npmjs.com/package/sinyx-mcp" target="_blank" rel="noreferrer">sinyx-mcp on npm</a>.</p>
     </section>
   </main>
 

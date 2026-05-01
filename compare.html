@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sinyx vs Firecrawl, Jina Reader, and Tavily - Agent Context Comparison</title>
+  <meta name="description" content="Compare Sinyx with Firecrawl, Jina Reader, and Tavily for AI agents that need Markdown, chunks, citations, freshness, quality signals, and MCP workflows.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/compare">
+  <meta property="og:title" content="Sinyx Agent Context Comparison">
+  <meta property="og:description" content="See where Sinyx fits among Firecrawl, Jina Reader, and Tavily for source-aware AI agent context.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sinyx.me/compare">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/mcp">MCP</a>
+        <a href="/tos">Terms of Service</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
+
+  <main class="doc-layout shell">
+    <header class="doc-hero">
+      <p class="eyebrow">Comparison</p>
+      <h1>Sinyx is built for source-aware AI agent context.</h1>
+      <p>Firecrawl, Jina Reader, and Tavily are strong tools. Sinyx is intentionally narrower: one lightweight API for turning public URLs into Markdown, semantic chunks, citation metadata, freshness, and quality signals that an agent can use immediately.</p>
+    </header>
+
+    <section class="doc-section">
+      <h2>Where Sinyx Fits</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Best known for</th>
+            <th>Use Sinyx when</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sinyx</strong></td>
+            <td>Agent-ready <code>context</code>: Markdown, chunks, citation, freshness, quality, and MCP access.</td>
+            <td>You want a compact response an AI agent can cite, rank, store, and reason over without extra preprocessing.</td>
+          </tr>
+          <tr>
+            <td>Firecrawl</td>
+            <td>Broad scraping, crawling, browser actions, structured extraction, screenshots, and MCP.</td>
+            <td>You do not need a full crawling/browser platform and want source-aware context as the default shape.</td>
+          </tr>
+          <tr>
+            <td>Jina Reader</td>
+            <td>Fast URL-to-LLM-friendly text through the <code>r.jina.ai</code> prefix and related reader/search tooling.</td>
+            <td>You need chunks, citation strings, freshness fields, and quality scoring packaged with the extracted content.</td>
+          </tr>
+          <tr>
+            <td>Tavily Extract</td>
+            <td>Extraction for one or more URLs with Markdown/text output, images/favicon options, and API request IDs.</td>
+            <td>You want the extraction result shaped specifically for agent memory, RAG ingestion, and source attribution.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="doc-section">
+      <h2>The Sinyx Wedge</h2>
+      <p>The differentiator is <code>format: "context"</code>. It returns the content and the source signals together:</p>
+      <pre><code>{
+  "url": "https://example.com",
+  "format": "context"
+}</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Why an agent needs it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>markdown</code></td>
+            <td>Readable source content for prompts, summaries, and tool output.</td>
+          </tr>
+          <tr>
+            <td><code>chunks</code></td>
+            <td>Semantic blocks with heading paths and priority scores for retrieval and memory.</td>
+          </tr>
+          <tr>
+            <td><code>citation</code></td>
+            <td>Title, author when available, canonical URL, fetched time, APA, and MLA strings.</td>
+          </tr>
+          <tr>
+            <td><code>freshness</code></td>
+            <td>Fetched time, published/modified dates when available, age in days, and recent signal.</td>
+          </tr>
+          <tr>
+            <td><code>quality</code></td>
+            <td>0-1 score with page type, word count, code/table detection, and link-density signal.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="doc-section">
+      <h2>Choose Based On The Job</h2>
+      <ul class="pricing-list">
+        <li>Choose Firecrawl when you need crawling, browser actions, screenshots, or a larger web automation platform.</li>
+        <li>Choose Jina Reader when you want a quick URL-to-LLM-readable text prefix and do not need Sinyx context fields.</li>
+        <li>Choose Tavily when your workflow already uses Tavily search/extract and Markdown or text is enough.</li>
+        <li>Choose Sinyx when your agent needs one source-aware response with Markdown, chunks, citation, freshness, and quality.</li>
+      </ul>
+      <div class="pricing-actions">
+        <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="/docs">Read docs</a>
+        <a class="button button-secondary" href="/mcp">Set up MCP</a>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <h2>Reference Links</h2>
+      <p>Comparison based on public product documentation.</p>
+      <ul class="pricing-list">
+        <li><a href="https://docs.firecrawl.dev/features/scrape" target="_blank" rel="noreferrer">Firecrawl scrape docs</a></li>
+        <li><a href="https://docs.firecrawl.dev/mcp-server" target="_blank" rel="noreferrer">Firecrawl MCP docs</a></li>
+        <li><a href="https://jina.ai/reader/" target="_blank" rel="noreferrer">Jina Reader docs</a></li>
+        <li><a href="https://docs.tavily.com/api-reference/endpoint/extract" target="_blank" rel="noreferrer">Tavily Extract docs</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Platform</h4>
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/mcp">MCP setup</a>
+        <a href="/compare">Compare</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

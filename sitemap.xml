@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://sinyx.me/compare</loc>
+    <lastmod>2026-05-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sinyx.me/privacy</loc>
     <lastmod>2026-04-29</lastmod>
     <priority>0.4</priority>

@@ -11,6 +11,7 @@ const routes = new Map([
   ["/docs", "docs.html"],
   ["/mcp", "mcp.html"],
   ["/pricing", "pricing.html"],
+  ["/compare", "compare.html"],
   ["/tos", "tos.html"],
   ["/privacy", "privacy.html"],
 ]);

@@ -382,6 +382,14 @@ code {
   font-size: 14px;
 }
 
+.compact-agent-section {
+  padding: 72px 0;
+}
+
+.compact-grid {
+  padding: 28px 0 0;
+}
+
 .final-cta {
   padding: 96px 0;
   text-align: center;

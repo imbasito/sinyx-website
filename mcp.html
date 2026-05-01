@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP for AI Tools - Sinyx</title>
+  <meta name="description" content="Use Sinyx in Claude Code, Codex, Cursor, Windsurf, and other MCP-compatible AI tools through the published sinyx-mcp npm package.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/mcp">
+  <meta property="og:title" content="MCP for AI Tools - Sinyx">
+  <meta property="og:description" content="Connect Sinyx web extraction to AI tools with npx, MCP, and your RapidAPI key.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sinyx.me/mcp">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/mcp">MCP</a>
+        <a href="/tos">Terms of Service</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
+
+  <main class="doc-layout shell">
+    <header class="doc-hero">
+      <p class="eyebrow">MCP for AI tools</p>
+      <h1>Use Sinyx directly inside your AI coding workflow.</h1>
+      <p>Install the published <code>sinyx-mcp</code> package with <code>npx</code>, connect your RapidAPI key, and extract clean web content from Claude Code, Codex, Cursor, Windsurf, or any MCP-compatible client.</p>
+    </header>
+
+    <section class="doc-section">
+      <h2>Why MCP matters</h2>
+      <p>MCP turns Sinyx from a standalone API into a tool your AI assistant can call. Agents can fetch Markdown, full metadata, plain text, HTML, or semantic chunks without every user wiring custom HTTP requests by hand.</p>
+      <div class="format-grid compact-grid">
+        <article>
+          <span class="metric">Claude Code</span>
+          <h3>Research while coding.</h3>
+          <p>Let Claude fetch clean reference material, docs, and articles through Sinyx.</p>
+        </article>
+        <article>
+          <span class="metric">Codex</span>
+          <h3>Tool-ready context.</h3>
+          <p>Use Sinyx extraction in coding agents and developer automation flows.</p>
+        </article>
+        <article>
+          <span class="metric">Cursor</span>
+          <h3>Project-local setup.</h3>
+          <p>Add Sinyx to editor workflows with a simple MCP server config.</p>
+        </article>
+        <article>
+          <span class="metric">Windsurf</span>
+          <h3>Agent-friendly browsing.</h3>
+          <p>Give Cascade access to structured web content through the same API key.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <h2>Recommended config</h2>
+      <p>This configuration uses the published npm package. Replace <code>your-rapidapi-key</code> with a key from a RapidAPI app subscribed to Sinyx.</p>
+      <pre><code>{
+  "mcpServers": {
+    "sinyx": {
+      "command": "npx",
+      "args": ["-y", "sinyx-mcp"],
+      "env": {
+        "SINYX_API_BASE_URL": "https://sinyx.p.rapidapi.com",
+        "SINYX_API_KEY": "your-rapidapi-key",
+        "SINYX_API_KEY_HEADER": "x-rapidapi-key",
+        "SINYX_RAPIDAPI_HOST": "sinyx.p.rapidapi.com"
+      }
+    }
+  }
+}</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>Claude Code</h2>
+      <pre><code>claude mcp add --transport stdio \
+  --env SINYX_API_BASE_URL=https://sinyx.p.rapidapi.com \
+  --env SINYX_API_KEY=your-rapidapi-key \
+  --env SINYX_API_KEY_HEADER=x-rapidapi-key \
+  --env SINYX_RAPIDAPI_HOST=sinyx.p.rapidapi.com \
+  sinyx -- npx -y sinyx-mcp@latest</code></pre>
+      <p>Then ask Claude Code: <code>Use Sinyx to extract https://example.com as markdown.</code></p>
+    </section>
+
+    <section class="doc-section">
+      <h2>Available tools</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>sinyx_extract</code></td>
+            <td>Extract one public URL as <code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, or <code>chunks</code>.</td>
+          </tr>
+          <tr>
+            <td><code>sinyx_batch_extract</code></td>
+            <td>Extract one to five public URLs in a single request.</td>
+          </tr>
+          <tr>
+            <td><code>sinyx_status</code></td>
+            <td>Check API status or RapidAPI metadata fallback.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="doc-section">
+      <h2>Links</h2>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://www.npmjs.com/package/sinyx-mcp" target="_blank" rel="noreferrer">View npm package</a>
+        <a class="button button-secondary" href="/docs">Read API docs</a>
+        <a class="button button-secondary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Platform</h4>
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/mcp">MCP setup</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

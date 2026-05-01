@@ -115,6 +115,32 @@ x-rapidapi-key: YOUR_KEY</code></pre>
     </section>
 
     <section class="doc-section">
+      <h2>Agent quickstart</h2>
+      <p>For an AI agent, request <code>format: "context"</code> and pass the source, freshness, quality, top chunks, and Markdown into your prompt or retrieval step.</p>
+      <pre><code>const response = await fetch("https://sinyx.p.rapidapi.com/v1/extract", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "x-rapidapi-host": "sinyx.p.rapidapi.com",
+    "x-rapidapi-key": process.env.RAPIDAPI_KEY
+  },
+  body: JSON.stringify({
+    url: "https://example.com/article",
+    format: "context"
+  })
+});
+
+const page = await response.json();
+const agentContext = {
+  source: page.citation,
+  freshness: page.freshness,
+  quality: page.quality,
+  topChunks: page.chunks.slice(0, 3),
+  markdown: page.markdown
+};</code></pre>
+    </section>
+
+    <section class="doc-section">
       <h2>Batch extraction</h2>
       <div class="endpoint-row">
         <span>POST</span>

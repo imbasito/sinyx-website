@@ -166,39 +166,12 @@
       </article>
     </section>
 
-    <section class="agent-section section-band compact-agent-section">
-      <div class="shell agent-grid">
-        <div class="section-copy">
-          <p class="eyebrow">For AI tools</p>
-          <h2>Use Sinyx through MCP when your agent needs web context.</h2>
-          <p>The same RapidAPI key works in Claude Code, Codex, Cursor, Windsurf, and other MCP-compatible clients.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/mcp">Set up MCP</a>
-            <a class="button button-secondary" href="https://www.npmjs.com/package/sinyx-mcp" target="_blank" rel="noreferrer">View npm package</a>
-          </div>
-        </div>
-        <div class="agent-card" aria-label="MCP setup example">
-          <div class="proof-header">
-            <span>MCP</span>
-            <span>npx ready</span>
-          </div>
-          <pre><code>{
-  "command": "npx",
-  "args": ["-y", "sinyx-mcp"],
-  "tools": [
-    "sinyx_extract",
-    "sinyx_batch_extract"
-  ]
-}</code></pre>
-        </div>
-      </div>
-    </section>
-
     <section id="formats" class="section-band">
       <div class="shell">
         <div class="section-heading">
           <p class="eyebrow">Output formats</p>
           <h2>One endpoint, multiple workflow shapes.</h2>
+          <p>Sinyx can also be used inside MCP-compatible tools through the published <code>sinyx-mcp</code> package.</p>
         </div>
         <div class="format-grid">
           <article>
@@ -231,10 +204,11 @@
 
     <section class="shell final-cta">
       <h2>Build on cleaner web content.</h2>
-      <p>Start with the demo, then move into the API when you are ready to wire Sinyx into production AI workflows.</p>
+      <p>Start with the demo, then move into the API or MCP package when you are ready to wire Sinyx into production AI workflows.</p>
       <div class="hero-actions">
         <a class="button button-primary" href="#demo">Try the product</a>
         <a class="button button-secondary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="/mcp">MCP setup</a>
       </div>
     </section>
   </main>

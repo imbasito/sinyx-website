@@ -27,7 +27,7 @@
 ## After Deploy
 
 - Open `https://sinyx.me/`.
-- Test clean URLs: `/docs`, `/pricing`, `/tos`, `/privacy`.
+- Test clean URLs: `/start`, `/docs`, `/pricing`, `/tos`, `/privacy`.
 - Test redirect: `/terms` should redirect to `/tos`.
 - Test redirect: `/api` should open RapidAPI pricing.
 - Test the demo with a public URL after Turnstile verification.
@@ -38,6 +38,7 @@
 
 - `https://sinyx.me/`
 - `https://sinyx.me/docs`
+- `https://sinyx.me/start`
 - `https://sinyx.me/pricing`
 - `https://sinyx.me/tos`
 - `https://sinyx.me/privacy`

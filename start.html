@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start With Sinyx - Agent Context Quickstart</title>
+  <meta name="description" content="Start using Sinyx with RapidAPI, context format, and MCP for AI agents.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/start">
+  <meta property="og:title" content="Start With Sinyx">
+  <meta property="og:description" content="Get a Sinyx API key, make your first context request, and connect Sinyx to MCP-compatible AI tools.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://sinyx.me/start">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Start With Sinyx",
+      "description": "Get a Sinyx API key, make your first context request, and connect Sinyx to MCP-compatible AI tools.",
+      "url": "https://sinyx.me/start",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sinyx",
+        "url": "https://sinyx.me/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="/#demo">Demo</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">Docs</a>
+        <a href="/mcp">MCP</a>
+        <a href="/tos">Terms of Service</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
+
+  <main class="doc-layout shell">
+    <header class="doc-hero">
+      <p class="eyebrow">First successful request</p>
+      <h1>Start with agent-ready web context.</h1>
+      <p>Use this path when you want to connect Sinyx to an AI agent, RAG pipeline, research assistant, or MCP client without building your own extraction and cleanup layer.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="/docs">Read API docs</a>
+        <a class="button button-secondary" href="/mcp">Set up MCP</a>
+      </div>
+    </header>
+
+    <section class="doc-section">
+      <h2>1. Get a RapidAPI key.</h2>
+      <p>Subscribe to Sinyx on RapidAPI, then use the generated app key with the RapidAPI host header.</p>
+      <pre><code>x-rapidapi-host: sinyx.p.rapidapi.com
+x-rapidapi-key: YOUR_RAPIDAPI_KEY</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>2. Make one context request.</h2>
+      <p>Start with a stable public URL. The important part is <code>format: "context"</code>.</p>
+      <pre><code>curl --request POST \
+  --url https://sinyx.p.rapidapi.com/v1/extract \
+  --header 'Content-Type: application/json' \
+  --header 'x-rapidapi-host: sinyx.p.rapidapi.com' \
+  --header 'x-rapidapi-key: YOUR_RAPIDAPI_KEY' \
+  --data '{
+    "url": "https://example.com",
+    "format": "context"
+  }'</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>3. Check the success shape.</h2>
+      <p>A successful agent-context response should include Markdown, chunks, citation, freshness, and quality signals.</p>
+      <div class="format-grid compact-grid">
+        <article>
+          <span class="metric">Markdown</span>
+          <h3>Prompt-ready content.</h3>
+          <p>Readable extracted content for summaries, reasoning, and answer generation.</p>
+        </article>
+        <article>
+          <span class="metric">Chunks</span>
+          <h3>Retrieval-ready blocks.</h3>
+          <p>Semantic sections with heading paths, priority scores, and chunk text.</p>
+        </article>
+        <article>
+          <span class="metric">Source</span>
+          <h3>Citation and freshness.</h3>
+          <p>Domain, canonical URL, fetched time, freshness signal, and quality score.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="doc-section">
+      <h2>4. Use it in an agent.</h2>
+      <p>For Node workflows, shape the response into the context your agent should see.</p>
+      <pre><code>const page = await response.json();
+
+const agentContext = {
+  source: page.citation,
+  freshness: page.freshness,
+  quality: page.quality,
+  topChunks: page.chunks.slice(0, 3),
+  markdown: page.markdown
+};</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>5. Connect MCP when the agent should call Sinyx directly.</h2>
+      <p>The published <code>sinyx-mcp</code> package defaults extraction tools to <code>context</code>, which keeps MCP clients aligned with agent workflows.</p>
+      <pre><code>{
+  "mcpServers": {
+    "sinyx": {
+      "command": "npx",
+      "args": ["-y", "sinyx-mcp"],
+      "env": {
+        "SINYX_API_BASE_URL": "https://sinyx.p.rapidapi.com",
+        "SINYX_API_KEY": "YOUR_RAPIDAPI_KEY",
+        "SINYX_API_KEY_HEADER": "x-rapidapi-key",
+        "SINYX_RAPIDAPI_HOST": "sinyx.p.rapidapi.com"
+      }
+    }
+  }
+}</code></pre>
+    </section>
+
+    <section class="doc-section">
+      <h2>What to build first.</h2>
+      <p>The strongest first use cases are agents that need fresh public documentation, source-aware research notes, product-page ingestion, or safer URL handling for user-provided links.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="/compare">Compare context output</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Platform</h4>
+        <a href="/#demo">Demo</a>
+        <a href="/start">Start</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/mcp">MCP setup</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

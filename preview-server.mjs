@@ -9,6 +9,7 @@ const port = Number(process.env.PORT || 4173);
 const routes = new Map([
   ["/", "index.html"],
   ["/docs", "docs.html"],
+  ["/start", "start.html"],
   ["/mcp", "mcp.html"],
   ["/pricing", "pricing.html"],
   ["/compare", "compare.html"],

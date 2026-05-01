@@ -82,13 +82,13 @@
           </div>
           <pre><code>{
   "success": true,
-  "format": "chunks",
+  "format": "context",
   "title": "AI Infrastructure Guide",
   "chunks": [
     {
       "headingPath": "Root > Setup",
       "priority": 0.82,
-      "content": "Clean, structured output..."
+      "content": "Clean, source-aware output..."
     }
   ]
 }</code></pre>
@@ -115,6 +115,7 @@
               <option value="text">Plain text</option>
               <option value="html">HTML</option>
               <option value="full">Full response</option>
+              <option value="context">Agent context</option>
             </select>
             <button class="button button-primary demo-btn" id="demo-btn" disabled>Extract</button>
           </div>
@@ -134,7 +135,7 @@
           <div id="demo-output-container" class="output-panel">
             <div class="output-header">
               <span>response</span>
-              <span>structured output</span>
+              <span>agent-ready output</span>
             </div>
             <pre><code id="demo-output">Awaiting URL...</code></pre>
           </div>
@@ -159,9 +160,9 @@
         <p>Batch extraction processes multiple URLs while preserving partial success when individual pages fail.</p>
       </article>
       <article>
-        <span class="metric">5 formats</span>
+        <span class="metric">6 formats</span>
         <h3>AI-ready outputs.</h3>
-        <p>Full responses, Markdown, plain text, readable HTML, and semantic chunks support LLM prompts, RAG ingestion, search, and automation workflows.</p>
+        <p>Full responses, Markdown, plain text, readable HTML, semantic chunks, and source-aware context support agent workflows.</p>
       </article>
     </section>
 
@@ -219,6 +220,10 @@
           <article>
             <h3>Chunks</h3>
             <p>Semantic blocks with heading paths, character counts, and priority scores.</p>
+          </article>
+          <article>
+            <h3>Context</h3>
+            <p>Agent-ready output with Markdown, chunks, citation, freshness, and quality signals.</p>
           </article>
         </div>
       </div>

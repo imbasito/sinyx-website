@@ -56,8 +56,8 @@
   <main class="doc-layout shell">
     <header class="doc-hero">
       <p class="eyebrow">API reference</p>
-      <h1>Extract clean AI-ready content from public URLs.</h1>
-      <p>Sinyx returns Markdown, text, HTML, full metadata, or semantic chunks from a single extraction pipeline.</p>
+      <h1>Extract clean agent-ready context from public URLs.</h1>
+      <p>Sinyx returns Markdown, text, HTML, full metadata, or semantic chunks from a single extraction pipeline. The product direction is simple: make public web pages safe and useful for AI agents.</p>
     </header>
 
     <section class="doc-section">
@@ -93,7 +93,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
             <td><code>format</code></td>
             <td>String</td>
             <td>No</td>
-            <td><code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, or <code>chunks</code>.</td>
+            <td><code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, <code>chunks</code>, or <code>context</code>.</td>
           </tr>
           <tr>
             <td><code>selector</code></td>
@@ -163,6 +163,37 @@ x-rapidapi-key: YOUR_KEY</code></pre>
             <td><code>priority</code></td>
             <td>Number</td>
             <td>Relevance score from <code>0.0</code> to <code>1.0</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="doc-section">
+      <h2>Agent context roadmap</h2>
+      <p>Use <code>format: "context"</code> when an agent needs source-aware context instead of a single raw representation.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Signal</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>citation</code></td>
+            <td>Lets agents cite source title, domain, author, fetched time, and canonical URL.</td>
+          </tr>
+          <tr>
+            <td><code>freshness</code></td>
+            <td>Helps agents decide whether a page is current enough for the task.</td>
+          </tr>
+          <tr>
+            <td><code>quality</code></td>
+            <td>Scores whether the extracted content is dense, useful, and low-noise.</td>
+          </tr>
+          <tr>
+            <td><code>context</code></td>
+            <td>Returns Markdown, chunks, citation, freshness, and quality in one agent-ready response.</td>
           </tr>
         </tbody>
       </table>

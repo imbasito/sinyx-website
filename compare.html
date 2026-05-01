@@ -121,6 +121,54 @@
     </section>
 
     <section class="doc-section">
+      <h2>Live Context Benchmark</h2>
+      <p>These results were produced through the same RapidAPI path customers use, with <code>format: "context"</code>. The benchmark intentionally uses stable public URLs so builders can reproduce the shape of the response.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>URL</th>
+            <th>Result</th>
+            <th>Context Signals</th>
+            <th>Latency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://example.com" target="_blank" rel="noreferrer">example.com</a></td>
+            <td>200 OK, 149 Markdown chars, 1 chunk</td>
+            <td>citation domain <code>example.com</code>, quality <code>0.30</code>, page type <code>webpage</code></td>
+            <td>2.6s</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.iana.org/help/example-domains" target="_blank" rel="noreferrer">IANA example domains</a></td>
+            <td>200 OK, 877 Markdown chars, 2 chunks</td>
+            <td>citation domain <code>iana.org</code>, quality <code>0.55</code>, page type <code>webpage</code></td>
+            <td>1.7s</td>
+          </tr>
+          <tr>
+            <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET" target="_blank" rel="noreferrer">MDN HTTP GET</a></td>
+            <td>200 OK, 3,475 Markdown chars, 5 chunks</td>
+            <td>citation domain <code>developer.mozilla.org</code>, quality <code>0.73</code>, page type <code>docs</code></td>
+            <td>3.7s</td>
+          </tr>
+          <tr>
+            <td><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noreferrer">Node.js introduction</a></td>
+            <td>200 OK, 3,862 Markdown chars, 2 chunks</td>
+            <td>citation domain <code>nodejs.org</code>, quality <code>0.66</code>, page type <code>docs</code></td>
+            <td>2.0s</td>
+          </tr>
+          <tr>
+            <td><a href="https://en.wikipedia.org/wiki/Markdown" target="_blank" rel="noreferrer">Wikipedia Markdown</a></td>
+            <td>200 OK, 30,000 Markdown chars, 3 chunks</td>
+            <td>citation domain <code>en.wikipedia.org</code>, quality <code>1.00</code>, page type <code>docs</code></td>
+            <td>3.6s</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The same run also showed RapidAPI rate limiting after several benchmark calls on the current plan. That is useful operationally: the $6 droplet is healthy, and the next scaling limit is marketplace plan/limit configuration before server size.</p>
+    </section>
+
+    <section class="doc-section">
       <h2>Choose Based On The Job</h2>
       <ul class="pricing-list">
         <li>Choose Firecrawl when you need crawling, browser actions, screenshots, or a larger web automation platform.</li>

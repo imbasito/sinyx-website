@@ -43,7 +43,7 @@
     <header class="doc-hero">
       <p class="eyebrow">Comparison</p>
       <h1>Sinyx is built for source-aware AI agent context.</h1>
-      <p>Firecrawl, Jina Reader, and Tavily are strong tools. Sinyx is intentionally narrower: one lightweight API for turning public URLs into Markdown, semantic chunks, citation metadata, freshness, and quality signals that an agent can use immediately.</p>
+      <p>The web extraction space is crowded. Sinyx wins by staying focused: one lightweight API for turning public URLs into Markdown, semantic chunks, citation metadata, freshness, and quality signals that an agent can use immediately.</p>
     </header>
 
     <section class="doc-section">
@@ -51,31 +51,31 @@
       <table>
         <thead>
           <tr>
-            <th>Tool</th>
-            <th>Best known for</th>
-            <th>Use Sinyx when</th>
+            <th>Question</th>
+            <th>Why it matters</th>
+            <th>Sinyx answer</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Sinyx</strong></td>
-            <td>Agent-ready <code>context</code>: Markdown, chunks, citation, freshness, quality, and MCP access.</td>
-            <td>You want a compact response an AI agent can cite, rank, store, and reason over without extra preprocessing.</td>
+            <td>Do I get more than Markdown?</td>
+            <td>Agents need content plus source signals, not only converted page text.</td>
+            <td><code>context</code> returns Markdown, chunks, citation, freshness, and quality together.</td>
           </tr>
           <tr>
-            <td>Firecrawl</td>
-            <td>Broad scraping, crawling, browser actions, structured extraction, screenshots, and MCP.</td>
-            <td>You do not need a full crawling/browser platform and want source-aware context as the default shape.</td>
+            <td>Can my agent cite the source?</td>
+            <td>Source attribution is important for research, documentation ingestion, and audit trails.</td>
+            <td>Sinyx returns title, author when available, source domain, canonical URL, fetched time, APA, and MLA.</td>
           </tr>
           <tr>
-            <td>Jina Reader</td>
-            <td>Fast URL-to-LLM-friendly text through the <code>r.jina.ai</code> prefix and related reader/search tooling.</td>
-            <td>You need chunks, citation strings, freshness fields, and quality scoring packaged with the extracted content.</td>
+            <td>Can I store it in RAG?</td>
+            <td>Raw pages are awkward for vector storage and retrieval.</td>
+            <td>Sinyx includes semantic chunks with heading paths, character counts, and priority scores.</td>
           </tr>
           <tr>
-            <td>Tavily Extract</td>
-            <td>Extraction for one or more URLs with Markdown/text output, images/favicon options, and API request IDs.</td>
-            <td>You want the extraction result shaped specifically for agent memory, RAG ingestion, and source attribution.</td>
+            <td>Can I judge whether the page is useful?</td>
+            <td>Agents should avoid treating every extracted page as equally valuable.</td>
+            <td>Sinyx returns freshness and quality signals including page type, word count, tables, code blocks, and link density.</td>
           </tr>
         </tbody>
       </table>
@@ -169,29 +169,18 @@
     </section>
 
     <section class="doc-section">
-      <h2>Choose Based On The Job</h2>
+      <h2>Why Builders Pick Sinyx</h2>
       <ul class="pricing-list">
-        <li>Choose Firecrawl when you need crawling, browser actions, screenshots, or a larger web automation platform.</li>
-        <li>Choose Jina Reader when you want a quick URL-to-LLM-readable text prefix and do not need Sinyx context fields.</li>
-        <li>Choose Tavily when your workflow already uses Tavily search/extract and Markdown or text is enough.</li>
-        <li>Choose Sinyx when your agent needs one source-aware response with Markdown, chunks, citation, freshness, and quality.</li>
+        <li>One response shape for agent context instead of stitching together separate extraction, chunking, citation, and scoring steps.</li>
+        <li>RapidAPI billing and keys, so teams can test without setting up a separate Sinyx account.</li>
+        <li>MCP package for Codex, Claude Code, Cursor, Windsurf, and other agent tools.</li>
+        <li>Security controls for SSRF, private networks, protocols, content types, response size, redirects, and timeouts.</li>
       </ul>
       <div class="pricing-actions">
         <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
         <a class="button button-secondary" href="/docs">Read docs</a>
         <a class="button button-secondary" href="/mcp">Set up MCP</a>
       </div>
-    </section>
-
-    <section class="doc-section">
-      <h2>Reference Links</h2>
-      <p>Comparison based on public product documentation.</p>
-      <ul class="pricing-list">
-        <li><a href="https://docs.firecrawl.dev/features/scrape" target="_blank" rel="noreferrer">Firecrawl scrape docs</a></li>
-        <li><a href="https://docs.firecrawl.dev/mcp-server" target="_blank" rel="noreferrer">Firecrawl MCP docs</a></li>
-        <li><a href="https://jina.ai/reader/" target="_blank" rel="noreferrer">Jina Reader docs</a></li>
-        <li><a href="https://docs.tavily.com/api-reference/endpoint/extract" target="_blank" rel="noreferrer">Tavily Extract docs</a></li>
-      </ul>
     </section>
   </main>
 

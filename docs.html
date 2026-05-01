@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Documentation - Sinyx</title>
-  <meta name="description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta name="description" content="Sinyx API documentation for extracting public URLs into agent-ready context, Markdown, chunks, citations, freshness, and quality signals.">
   <meta name="theme-color" content="#142A4C">
   <link rel="canonical" href="https://sinyx.me/docs">
   <meta property="og:title" content="Documentation - Sinyx">
-  <meta property="og:description" content="Sinyx API documentation for extracting web content into AI-ready formats.">
+  <meta property="og:description" content="Sinyx API documentation for extracting public URLs into agent-ready context, Markdown, chunks, citations, freshness, and quality signals.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://sinyx.me/docs">
   <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
@@ -26,7 +26,7 @@
       "@context": "https://schema.org",
       "@type": "TechArticle",
       "headline": "Sinyx API Documentation",
-      "description": "Sinyx API documentation for extracting web content into AI-ready formats.",
+      "description": "Sinyx API documentation for extracting public URLs into agent-ready context, Markdown, chunks, citations, freshness, and quality signals.",
       "url": "https://sinyx.me/docs",
       "publisher": {
         "@type": "Organization",
@@ -57,7 +57,7 @@
     <header class="doc-hero">
       <p class="eyebrow">API reference</p>
       <h1>Extract clean agent-ready context from public URLs.</h1>
-      <p>Sinyx returns Markdown, text, HTML, full metadata, or semantic chunks from a single extraction pipeline. The product direction is simple: make public web pages safe and useful for AI agents.</p>
+      <p>Sinyx returns agent-ready context, Markdown, text, HTML, full metadata, or semantic chunks from a single extraction pipeline. The product direction is simple: make public web pages safe and useful for AI agents.</p>
     </header>
 
     <section class="doc-section">
@@ -110,7 +110,7 @@ x-rapidapi-key: YOUR_KEY</code></pre>
   --header 'x-rapidapi-key: YOUR_KEY' \
   --data '{
     "url": "https://example.com/article",
-    "format": "markdown"
+    "format": "context"
   }'</code></pre>
     </section>
 
@@ -169,8 +169,12 @@ x-rapidapi-key: YOUR_KEY</code></pre>
     </section>
 
     <section class="doc-section">
-      <h2>Agent context roadmap</h2>
+      <h2>Context format</h2>
       <p>Use <code>format: "context"</code> when an agent needs source-aware context instead of a single raw representation.</p>
+      <pre><code>{
+  "url": "https://example.com/article",
+  "format": "context"
+}</code></pre>
       <table>
         <thead>
           <tr>
@@ -197,6 +201,36 @@ x-rapidapi-key: YOUR_KEY</code></pre>
           </tr>
         </tbody>
       </table>
+      <pre><code>{
+  "success": true,
+  "url": "https://example.com/article",
+  "title": "Example Article",
+  "markdown": "# Example Article\n\nClean extracted content...",
+  "chunks": [
+    {
+      "chunkIndex": 0,
+      "headingPath": "Root > Overview",
+      "priority": 0.7,
+      "content": "Clean extracted content for agent workflows."
+    }
+  ],
+  "citation": {
+    "title": "Example Article",
+    "sourceDomain": "example.com",
+    "canonicalUrl": "https://example.com/article",
+    "fetchedAt": "2026-05-01T12:00:00.000Z"
+  },
+  "freshness": {
+    "fetchedAt": "2026-05-01T12:00:00.000Z",
+    "ageDays": 11,
+    "isRecent": true
+  },
+  "quality": {
+    "score": 0.88,
+    "pageType": "article",
+    "hasTables": true
+  }
+}</code></pre>
     </section>
 
     <section class="doc-section">

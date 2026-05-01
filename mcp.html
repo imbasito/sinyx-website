@@ -48,7 +48,7 @@
 
     <section class="doc-section">
       <h2>Why MCP matters</h2>
-      <p>MCP turns Sinyx from a standalone API into a tool your AI assistant can call. Agents can fetch source-aware context, Markdown, full metadata, plain text, HTML, or semantic chunks without every user wiring custom HTTP requests by hand.</p>
+      <p>MCP turns Sinyx from a standalone API into a tool your AI assistant can call. Extraction defaults to source-aware context, so agents receive Markdown, chunks, citation, freshness, and quality signals without every user wiring custom HTTP requests by hand.</p>
       <div class="format-grid compact-grid">
         <article>
           <span class="metric">Claude Code</span>
@@ -115,11 +115,11 @@
         <tbody>
           <tr>
             <td><code>sinyx_extract</code></td>
-            <td>Extract one public URL as <code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, <code>chunks</code>, or <code>context</code>.</td>
+            <td>Extract one public URL. Defaults to <code>context</code>; also supports <code>full</code>, <code>markdown</code>, <code>text</code>, <code>html</code>, and <code>chunks</code>.</td>
           </tr>
           <tr>
             <td><code>sinyx_batch_extract</code></td>
-            <td>Extract one to five public URLs in a single request.</td>
+            <td>Extract one to five public URLs in a single request. Defaults to <code>context</code>.</td>
           </tr>
           <tr>
             <td><code>sinyx_status</code></td>

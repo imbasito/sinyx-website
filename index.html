@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sinyx - Opportunity Monitoring Agent</title>
-  <meta name="description" content="Sinyx monitors public websites for tenders, RFPs, competitor changes, and important business signals, then sends source-cited intelligence briefings.">
+  <title>Sinyx - Web Content Infrastructure for AI</title>
+  <meta name="description" content="Sinyx turns public web pages into clean, source-aware context for AI agents, RAG, MCP tools, and monitoring workflows.">
   <meta name="theme-color" content="#142A4C">
   <link rel="canonical" href="https://sinyx.me/">
-  <meta property="og:title" content="Sinyx - Opportunity Monitoring Agent">
-  <meta property="og:description" content="Source-cited monitoring for tenders, RFPs, competitor changes, and important public web signals.">
+  <meta property="og:title" content="Sinyx - Web Content Infrastructure for AI">
+  <meta property="og:description" content="Clean, source-aware web context for AI agents, RAG, MCP tools, and monitoring workflows.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sinyx.me/">
   <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sinyx - Opportunity Monitoring Agent">
-  <meta name="twitter:description" content="Source-cited monitoring for tenders, RFPs, competitor changes, and important public web signals.">
+  <meta name="twitter:title" content="Sinyx - Web Content Infrastructure for AI">
+  <meta name="twitter:description" content="Clean, source-aware web context for AI agents, RAG, MCP tools, and monitoring workflows.">
   <meta name="twitter:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
@@ -27,10 +27,11 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
+      "@type": "SoftwareApplication",
       "name": "Sinyx",
-      "serviceType": "Opportunity monitoring and source intelligence",
-      "description": "Sinyx monitors public websites for tenders, RFPs, competitor changes, and important business signals, then sends source-cited intelligence briefings.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Sinyx turns public web pages into clean, source-aware context for AI agents, RAG, MCP tools, and monitoring workflows.",
       "url": "https://sinyx.me/",
       "offers": {
         "@type": "Offer",
@@ -51,13 +52,13 @@
         <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
       </a>
       <div class="nav-links">
-        <a href="#pilot">Pilot</a>
+        <a href="#demo">Demo</a>
         <a href="/pricing">Pricing</a>
         <a href="/docs">Docs</a>
         <a href="/mcp">MCP</a>
         <a href="/tos">Terms of Service</a>
       </div>
-      <a class="nav-cta" href="mailto:ibasitkhan.98@gmail.com?subject=Sinyx%20monitoring%20pilot">Request pilot</a>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
     </div>
   </nav>
 
@@ -65,101 +66,153 @@
     <section class="hero-section">
       <div class="shell hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Opportunity intelligence for teams</p>
-          <h1>Monitor public websites for business opportunities and market changes.</h1>
-          <p class="hero-text">Sinyx watches tenders, RFPs, competitor pages, vendor updates, and public sources, then turns changes into source-cited briefings your team can act on.</p>
+          <p class="eyebrow">Source-aware web context for AI agents</p>
+          <h1>Make messy web content usable for AI.</h1>
+          <p class="hero-text">Sinyx turns public URLs into clean Markdown, chunks, citations, freshness, and quality signals that fit directly into LLM prompts, RAG pipelines, MCP tools, and monitoring agents.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="mailto:ibasitkhan.98@gmail.com?subject=Sinyx%20monitoring%20pilot">Request pilot</a>
-            <a class="button button-secondary" href="#pilot">See pilot offer</a>
-            <a class="button button-secondary" href="/docs">API for builders</a>
+            <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+            <a class="button button-secondary" href="#demo">Try demo</a>
+            <a class="button button-secondary" href="#pilot">Monitoring pilot</a>
           </div>
         </div>
 
-        <div class="proof-panel" aria-label="Example monitoring briefing">
+        <div class="proof-panel" aria-label="Example extraction output">
           <div class="proof-header">
-            <span>weekly intelligence brief</span>
-            <span>source cited</span>
+            <span>POST /v1/extract</span>
+            <span>context</span>
           </div>
-          <pre><code>New opportunity found
+          <pre><code>{
+  "format": "context",
+  "citation": {
+    "sourceUrl": "https://example.com/page",
+    "fetchedAt": "2026-05-02T09:00:00Z"
+  },
+  "freshness": { "label": "recent" },
+  "chunks": [
+    {
+      "headingPath": "Root > Pricing",
+      "priority": 0.86,
+      "content": "Clean, source-aware output..."
+    }
+  ]
+}</code></pre>
+        </div>
+      </div>
+    </section>
 
-Source: city procurement portal
-Signal: software support RFP posted
-Fit: web app maintenance, 12-month contract
-Action: review by Friday
+    <section id="demo" class="demo-section section-band">
+      <div class="shell split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Live product proof</p>
+          <h2>Extract a real page.</h2>
+          <p>Paste a public URL, verify, and inspect the output. The demo is intentionally limited, but it uses the same extraction path as the API.</p>
+        </div>
 
-Why it matters:
-This matches your watchlist for
-public-sector software services.</code></pre>
+        <div class="demo-surface">
+          <div class="demo-input-group">
+            <input type="url" id="demo-url" placeholder="https://example.com/article" autocomplete="url" required>
+          </div>
+          <div class="demo-controls">
+            <select id="demo-format" aria-label="Output format">
+              <option value="context" selected>Agent context</option>
+              <option value="markdown">Markdown</option>
+              <option value="chunks">RAG chunks</option>
+              <option value="text">Plain text</option>
+              <option value="html">HTML</option>
+              <option value="full">Full response</option>
+            </select>
+            <button class="button button-primary demo-btn" id="demo-btn" disabled>Extract</button>
+          </div>
+
+          <div class="cf-turnstile-wrapper">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAADDKt22l6jVfuFID"
+              data-theme="light"
+              data-size="flexible"
+              data-callback="sinyxTurnstileSuccess"
+              data-expired-callback="sinyxTurnstileExpired"
+              data-error-callback="sinyxTurnstileError"></div>
+          </div>
+          <div id="demo-status" class="demo-status" role="status" aria-live="polite">Verify to run the demo.</div>
+
+          <div id="demo-output-container" class="output-panel">
+            <div class="output-header">
+              <span>response</span>
+              <span>agent-ready output</span>
+            </div>
+            <pre><code id="demo-output">Awaiting URL...</code></pre>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="shell trust-grid">
       <article>
-        <span class="metric">Tenders</span>
-        <h3>Find new opportunities.</h3>
-        <p>Watch procurement portals, RFP pages, grant lists, and public opportunity boards for fresh matches.</p>
+        <span class="metric">Context</span>
+        <h3>Built for agent inputs.</h3>
+        <p>Markdown, semantic chunks, citations, freshness, and quality signals give agents cleaner source material.</p>
       </article>
       <article>
-        <span class="metric">Competitors</span>
-        <h3>Catch market changes.</h3>
-        <p>Track pricing pages, landing pages, hiring pages, documentation, and positioning shifts.</p>
+        <span class="metric">MCP</span>
+        <h3>Usable inside AI tools.</h3>
+        <p>The published MCP package lets Codex, Claude, Cursor, and other compatible tools call Sinyx directly.</p>
       </article>
       <article>
-        <span class="metric">Sources</span>
-        <h3>Keep the evidence.</h3>
-        <p>Every alert includes the source URL, fetched time, summary, and why the change may matter.</p>
+        <span class="metric">SSRF</span>
+        <h3>Network-aware by default.</h3>
+        <p>Private ranges, local hostnames, metadata endpoints, redirect abuse, and unsafe protocols are blocked.</p>
       </article>
       <article>
         <span class="metric">Pilot</span>
-        <h3>Start without a dashboard.</h3>
-        <p>Begin with a managed watchlist and weekly briefings before investing in a custom system.</p>
+        <h3>One focused income offer.</h3>
+        <p>The same engine powers managed monitoring for tenders, competitors, and source-cited market changes.</p>
       </article>
     </section>
 
     <section id="pilot" class="section-band">
       <div class="shell">
         <div class="section-heading">
-          <p class="eyebrow">Managed monitoring pilot</p>
-          <h2>Give Sinyx a watchlist. Get source-cited alerts.</h2>
-          <p>The first offer is intentionally simple: we help define your sources, monitor them, and send briefings when something important appears or changes.</p>
+          <p class="eyebrow">Vertical offer powered by the engine</p>
+          <h2>Need outcomes, not just an API? Start with monitoring.</h2>
+          <p>Sinyx stays a reusable web-context engine. The first focused service offer is managed monitoring: give us sources, define signals, and receive source-cited briefings.</p>
         </div>
         <div class="format-grid">
           <article>
-            <h3>1. Choose sources</h3>
-            <p>Tender portals, competitor pages, vendor docs, public announcements, hiring pages, or niche industry sites.</p>
+            <h3>Tenders and RFPs</h3>
+            <p>Watch public opportunity pages for fresh matches and summarize why each one may matter.</p>
           </article>
           <article>
-            <h3>2. Define signals</h3>
-            <p>New RFPs, pricing changes, product launches, grant windows, policy updates, or lead-quality signals.</p>
+            <h3>Competitor changes</h3>
+            <p>Track pricing, product, hiring, docs, and landing-page updates with the source kept attached.</p>
           </article>
           <article>
-            <h3>3. Receive briefings</h3>
+            <h3>Source-cited reports</h3>
             <p>Daily or weekly summaries with source links, change notes, relevance, and suggested next action.</p>
           </article>
           <article>
-            <h3>4. Give feedback</h3>
-            <p>Mark alerts as useful or noisy so the watchlist and scoring improve for your business.</p>
+            <h3>Developer API</h3>
+            <p>Builders can still use the core extraction API directly through RapidAPI and the public docs.</p>
           </article>
           <article>
-            <h3>5. Productize what repeats</h3>
-            <p>When a workflow proves valuable, we turn it into automation instead of guessing upfront.</p>
+            <h3>MCP package</h3>
+            <p>Use Sinyx from agent tools when you need fresh web context without switching workflows.</p>
           </article>
           <article>
-            <h3>Powered by Sinyx API</h3>
-            <p>The same engine remains available for developers through RapidAPI, docs, and MCP.</p>
+            <h3>Product path</h3>
+            <p>What repeats in pilots becomes product. What does not sell stays off the roadmap.</p>
           </article>
         </div>
       </div>
     </section>
 
     <section class="shell final-cta">
-      <h2>Start with a focused monitoring pilot.</h2>
-      <p>Send the sources you care about. We will turn them into a source-cited opportunity brief before building anything heavy.</p>
+      <h2>Build with the engine. Sell with the pilot.</h2>
+      <p>Use Sinyx as web-content infrastructure for AI, or start a focused monitoring pilot when you want a business outcome first.</p>
       <div class="hero-actions">
-        <a class="button button-primary" href="mailto:ibasitkhan.98@gmail.com?subject=Sinyx%20monitoring%20pilot">Request pilot</a>
-        <a class="button button-secondary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Use API</a>
-        <a class="button button-secondary" href="/start">Builder quickstart</a>
+        <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="#demo">Try demo</a>
+        <a class="button button-secondary" href="mailto:ibasitkhan.98@gmail.com?subject=Sinyx%20monitoring%20pilot">Request pilot</a>
       </div>
     </section>
   </main>
@@ -169,6 +222,7 @@ public-sector software services.</code></pre>
       <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
       <div>
         <h4>Platform</h4>
+        <a href="#demo">Demo</a>
         <a href="#pilot">Pilot</a>
         <a href="/start">Builder start</a>
         <a href="/pricing">Pricing</a>
@@ -189,5 +243,7 @@ public-sector software services.</code></pre>
       <p>&copy; 2026 Sinyx. All rights reserved.</p>
     </div>
   </footer>
+  <script src="script.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 </body>
 </html>

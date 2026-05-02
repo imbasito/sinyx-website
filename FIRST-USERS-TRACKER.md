@@ -11,6 +11,8 @@ Use this to track whether the agent-context direction is producing real demand.
 
 ## Conversation Log
 
+Use `first-users.csv` for the working log. Keep this Markdown table for quick notes or summaries.
+
 | Date | Person / Handle | Source | Use Case | Sent Start Link | Tried API | Objection / Signal | Next Action |
 |---|---|---|---|---|---|---|---|
 | YYYY-MM-DD |  | GitHub / X / Reddit / Discord / RapidAPI / Other |  | No | No |  |  |

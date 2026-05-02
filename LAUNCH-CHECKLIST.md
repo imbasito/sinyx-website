@@ -6,6 +6,7 @@
 - Confirm the API origin is `https://api.sinyx.me`.
 - Confirm the homepage leads with the Sinyx engine, not only the monitoring pilot.
 - Confirm the demo widget renders Turnstile and defaults to `context`.
+- Confirm the top navigation includes `Home` and `Services`, with services linking to the managed monitoring offer.
 - Confirm the pilot CTA opens an email to `ibasitkhan.98@gmail.com`.
 - Confirm the API remains live for builder pages and RapidAPI users.
 - Confirm RapidAPI pricing, plan names, and limits match `/pricing`.
@@ -32,7 +33,7 @@
 - Test clean URLs: `/start`, `/docs`, `/pricing`, `/tos`, `/privacy`.
 - Test redirect: `/terms` should redirect to `/tos`.
 - Test redirect: `/api` should open RapidAPI pricing.
-- Confirm the homepage headline is engine-first and the monitoring pilot is presented as a focused offer below it.
+- Confirm the homepage headline is engine-first and the managed monitoring service is presented as a focused offer below it.
 - Test the homepage demo form reaches the API after Turnstile verification.
 - Submit `https://sinyx.me/sitemap.xml` to Google Search Console.
 - Check social preview uses `https://sinyx.me/assets/social/sinyx-og-card.png`.

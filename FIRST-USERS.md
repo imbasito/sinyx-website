@@ -6,10 +6,11 @@ Goal: get the first paid pilot for source-cited opportunity monitoring, using Si
 
 Best early buyers:
 
+- Tender/RFP consultants who already help companies find public opportunities.
+- Exporters, suppliers, and service firms that depend on procurement or grant notices.
+- Compliance-heavy businesses watching regulator, policy, or vendor documentation changes.
+- B2B teams watching competitor pricing, offers, hiring, and positioning.
 - Software agencies looking for tenders, RFPs, and maintenance opportunities.
-- Consultants who need public opportunities, grants, or procurement updates.
-- B2B service businesses watching competitor pricing, offers, and positioning.
-- Teams that need source-cited monitoring but do not want to build a dashboard first.
 
 Avoid broad scraper buyers at the start. They compare only on price and volume. Sinyx should lead with business signals, source-cited briefings, and a managed pilot.
 
@@ -31,7 +32,7 @@ Those frames pull Sinyx into crowded comparison. Lead with the business outcome.
 ## First Outreach Message
 
 ```text
-Hey, I saw your team works on software/services projects.
+Hey, I saw your team works with public opportunities / market monitoring.
 
 I am testing Sinyx as a monitoring agent for tenders, RFPs, competitor changes, and public opportunity signals.
 
@@ -39,7 +40,7 @@ The idea is simple: you give it public sources to watch, and it sends source-cit
 
 Sample direction: https://sinyx.me/
 
-Would a weekly briefing like this be useful for your team if it found tenders or competitor moves you would otherwise miss?
+Would a weekly briefing like this be useful if it found opportunities, policy updates, or competitor moves you would otherwise miss?
 ```
 
 ## Shorter Reply Version
@@ -56,10 +57,11 @@ Pilot: https://sinyx.me/
 
 Start manually with conversations, not ads:
 
-- Software agencies and dev shops that bid on public projects.
-- Consultants who mention grants, tenders, RFPs, procurement, or market research.
+- Tender/RFP consultants and procurement advisors.
+- Exporters, suppliers, NGOs, and service firms that watch grants or tenders.
+- Compliance, HR, fintech, health, or legal-support businesses that watch public policy pages.
 - Service businesses that publish competitor comparisons or monitor pricing.
-- Existing network contacts who already sell technical or marketing services.
+- Software agencies and dev shops that bid on public projects.
 
 ## Success Criteria
 
@@ -67,7 +69,7 @@ The first milestone is not scale. It is proof that a real builder says:
 
 - "This could find opportunities we miss."
 - "A weekly source-cited briefing would save time."
-- "We would pay for this if it found relevant tenders/RFPs."
+- "We would pay for this if it found relevant tenders, RFPs, grants, policy changes, or competitor moves."
 
 Track:
 

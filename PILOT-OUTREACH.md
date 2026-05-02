@@ -4,14 +4,14 @@ Use this to start the first 10 conversations for the monitoring pilot.
 
 ## Goal
 
-Find one agency, consultant, or service business willing to test a paid or deposit-backed monitoring pilot.
+Find one consultant, procurement-heavy business, compliance-heavy business, agency, or service firm willing to test a paid or deposit-backed monitoring pilot.
 
 Do not pitch Sinyx as a finished SaaS dashboard. Pitch it as a managed watchlist and source-cited briefing service powered by Sinyx.
 
 ## Primary Message
 
 ```text
-Hey, I am testing a small monitoring pilot for software/service businesses.
+Hey, I am testing a small monitoring pilot for teams that need to track public opportunities or market changes.
 
 The idea: you give me public sources you care about, such as tender pages, RFP pages, competitor pricing pages, vendor changelogs, or industry pages.
 
@@ -20,13 +20,13 @@ Sinyx watches them and sends a weekly source-cited briefing when something impor
 Example report shape:
 https://sinyx.me/
 
-Would this be useful if it found opportunities or competitor moves your team would otherwise miss?
+Would this be useful if it found opportunities, policy updates, or competitor moves your team would otherwise miss?
 ```
 
 ## More Direct Message
 
 ```text
-I am testing a source-cited monitoring service for agencies.
+I am testing a source-cited monitoring service for teams that already check public websites manually.
 
 It watches public sites for tenders, RFPs, competitor changes, and vendor updates, then sends a weekly opportunity brief.
 

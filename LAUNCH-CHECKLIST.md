@@ -4,8 +4,8 @@
 
 - Confirm the live domain is `sinyx.me`.
 - Confirm the API origin is `https://api.sinyx.me`.
-- Confirm the demo endpoint is live at `https://api.sinyx.me/v1/demo`.
-- Confirm the Cloudflare Turnstile site key allows `sinyx.me`.
+- Confirm the pilot CTA opens an email to `ibasitkhan.98@gmail.com`.
+- Confirm the API remains live for builder pages and RapidAPI users.
 - Confirm RapidAPI pricing, plan names, and limits match `/pricing`.
 - Review `/tos` and `/privacy` for legal accuracy.
 - Confirm PNG launch assets are present in `assets/exports/png`.
@@ -22,7 +22,7 @@
 
 - Run `node preview-server.mjs` from `sinyx-website`.
 - Open `http://127.0.0.1:4173`.
-- Click through `/docs`, `/pricing`, `/tos`, and `/privacy`.
+- Click through `/`, `/start`, `/docs`, `/mcp`, `/pricing`, `/tos`, and `/privacy`.
 
 ## After Deploy
 
@@ -30,7 +30,7 @@
 - Test clean URLs: `/start`, `/docs`, `/pricing`, `/tos`, `/privacy`.
 - Test redirect: `/terms` should redirect to `/tos`.
 - Test redirect: `/api` should open RapidAPI pricing.
-- Test the demo with a public URL after Turnstile verification.
+- Confirm the homepage headline is the monitoring pilot offer, not the old API demo.
 - Submit `https://sinyx.me/sitemap.xml` to Google Search Console.
 - Check social preview uses `https://sinyx.me/assets/social/sinyx-og-card.png`.
 

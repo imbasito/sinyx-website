@@ -89,3 +89,5 @@ Ask every tester:
 ## Current Recommended Next Step
 
 Use `SAMPLE-MONITORING-REPORT.md` in outreach, then offer a small paid monitoring pilot.
+
+For message templates, use `PILOT-OUTREACH.md`.

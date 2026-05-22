@@ -8,6 +8,8 @@ const port = Number(process.env.PORT || 4173);
 
 const routes = new Map([
   ["/", "index.html"],
+  ["/products", "products.html"],
+  ["/services", "services.html"],
   ["/docs", "docs.html"],
   ["/start", "start.html"],
   ["/mcp", "mcp.html"],

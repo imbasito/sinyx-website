@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Sinyx Web Context API</title>
+  <meta name="description" content="Explore Sinyx products, starting with the Web Context API for clean Markdown, chunks, citations, freshness, and MCP-ready AI workflows.">
+  <meta name="theme-color" content="#142A4C">
+  <link rel="canonical" href="https://sinyx.me/products">
+  <meta property="og:title" content="Sinyx Products - Web Context API">
+  <meta property="og:description" content="Explore the Sinyx Web Context API and related developer tools for AI and automation workflows.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sinyx.me/products">
+  <meta property="og:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sinyx Products - Web Context API">
+  <meta name="twitter:description" content="Explore the Sinyx Web Context API and related developer tools for AI and automation workflows.">
+  <meta name="twitter:image" content="https://sinyx.me/assets/social/sinyx-og-card.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sinyx",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Sinyx turns public web pages into clean, source-aware context for AI agents, RAG, MCP tools, and monitoring workflows.",
+      "url": "https://sinyx.me/products",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://rapidapi.com/ibasitkhan98/api/sinyx/pricing"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Sinyx",
+        "url": "https://sinyx.me/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="brand-link" href="/" aria-label="Sinyx home">
+        <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="brand-logo">
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/services">Services</a>
+        <a href="/docs">Docs</a>
+      </div>
+      <a class="nav-cta" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero-section">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Source-aware web context for AI agents</p>
+          <h1>Make messy web content usable for AI.</h1>
+          <p class="hero-text">Sinyx turns public URLs into clean Markdown, chunks, citations, freshness, and quality signals that fit directly into LLM prompts, RAG pipelines, MCP tools, and monitoring agents.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+            <a class="button button-secondary" href="#demo">Try demo</a>
+          </div>
+        </div>
+
+        <div class="proof-panel" aria-label="Example extraction output">
+          <div class="proof-header">
+            <span>POST /v1/extract</span>
+            <span>context</span>
+          </div>
+          <pre><code>{
+  "format": "context",
+  "citation": {
+    "sourceUrl": "https://example.com/page",
+    "fetchedAt": "2026-05-02T09:00:00Z"
+  },
+  "freshness": { "label": "recent" },
+  "chunks": [
+    {
+      "headingPath": "Root > Pricing",
+      "priority": 0.86,
+      "content": "Clean, source-aware output..."
+    }
+  ]
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="demo-section section-band">
+      <div class="shell split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Live product proof</p>
+          <h2>Extract a real page.</h2>
+          <p>Paste a public URL, verify, and inspect the output. The demo is intentionally limited, but it uses the same extraction path as the API.</p>
+        </div>
+
+        <div class="demo-surface">
+          <div class="demo-input-group">
+            <input type="url" id="demo-url" placeholder="https://example.com/article" autocomplete="url" required>
+          </div>
+          <div class="demo-controls">
+            <select id="demo-format" aria-label="Output format">
+              <option value="context" selected>Agent context</option>
+              <option value="markdown">Markdown</option>
+              <option value="chunks">RAG chunks</option>
+              <option value="text">Plain text</option>
+              <option value="html">HTML</option>
+              <option value="full">Full response</option>
+            </select>
+            <button class="button button-primary demo-btn" id="demo-btn" disabled>Extract</button>
+          </div>
+
+          <div class="cf-turnstile-wrapper">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAADDKt22l6jVfuFID"
+              data-theme="light"
+              data-size="flexible"
+              data-callback="sinyxTurnstileSuccess"
+              data-expired-callback="sinyxTurnstileExpired"
+              data-error-callback="sinyxTurnstileError"></div>
+          </div>
+          <div id="demo-status" class="demo-status" role="status" aria-live="polite">Verify to run the demo.</div>
+
+          <div id="demo-output-container" class="output-panel">
+            <div class="output-header">
+              <span>response</span>
+              <span>agent-ready output</span>
+            </div>
+            <pre><code id="demo-output">Awaiting URL...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell trust-grid">
+      <article>
+        <span class="metric">Context</span>
+        <h3>Built for agent inputs.</h3>
+        <p>Markdown, semantic chunks, citations, freshness, and quality signals give agents cleaner source material.</p>
+      </article>
+      <article>
+        <span class="metric">MCP</span>
+        <h3>Usable inside AI tools.</h3>
+        <p>The published MCP package lets Codex, Claude, Cursor, and other compatible tools call Sinyx directly.</p>
+      </article>
+      <article>
+        <span class="metric">SSRF</span>
+        <h3>Network-aware by default.</h3>
+        <p>Private ranges, local hostnames, metadata endpoints, redirect abuse, and unsafe protocols are blocked.</p>
+      </article>
+      <article>
+        <span class="metric">Services</span>
+        <h3>One focused income offer.</h3>
+        <p>The same engine powers managed monitoring for tenders, competitors, and source-cited market changes.</p>
+      </article>
+    </section>
+
+    <section id="services" class="section-band">
+      <div class="shell">
+        <div class="section-heading">
+          <p class="eyebrow">Managed services powered by the engine</p>
+          <h2>Need outcomes, not just an API? Start with monitoring.</h2>
+          <p>Sinyx stays a reusable web-context engine. The first focused service offer is managed monitoring: give us sources, define signals, and receive source-cited briefings.</p>
+        </div>
+        <div class="format-grid">
+          <article>
+            <h3>Tenders and RFPs</h3>
+            <p>Watch public opportunity pages for fresh matches and summarize why each one may matter.</p>
+          </article>
+          <article>
+            <h3>Competitor changes</h3>
+            <p>Track pricing, product, hiring, docs, and landing-page updates with the source kept attached.</p>
+          </article>
+          <article>
+            <h3>Source-cited reports</h3>
+            <p>Daily or weekly summaries with source links, change notes, relevance, and suggested next action.</p>
+          </article>
+          <article>
+            <h3>Developer API</h3>
+            <p>Builders can still use the core extraction API directly through RapidAPI and the public docs.</p>
+          </article>
+          <article>
+            <h3>MCP package</h3>
+            <p>Use Sinyx from agent tools when you need fresh web context without switching workflows.</p>
+          </article>
+          <article>
+            <h3>Product path</h3>
+            <p>What repeats in pilots becomes product. What does not sell stays off the roadmap.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell final-cta">
+      <h2>Build with the Web Context API. Extend through services.</h2>
+      <p>Use this product directly through RapidAPI and MCP, or bring Sinyx into managed monitoring when you want a business outcome first.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://rapidapi.com/ibasitkhan98/api/sinyx/pricing" target="_blank" rel="noreferrer">Get API key</a>
+        <a class="button button-secondary" href="#demo">Try demo</a>
+        <a class="button button-secondary" href="mailto:ibasitkhan.98@gmail.com?subject=Sinyx%20monitoring%20service">Request monitoring</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <img src="assets/logo/sinyx-logo-primary.svg" alt="Sinyx" class="footer-logo">
+      <div>
+        <h4>Company</h4>
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/services">Services</a>
+        <a href="/start">Builder start</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/docs">API docs</a>
+        <a href="/mcp">MCP setup</a>
+        <a href="/compare">Compare</a>
+        <a href="/tos">Terms of Service</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:ibasitkhan.98@gmail.com">Support</a>
+        <a href="https://github.com/imbasito" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/imbasito" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>&copy; 2026 Sinyx. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="script.js" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+</body>
+</html>

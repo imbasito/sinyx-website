@@ -1,6 +1,6 @@
 # Sinyx Website
 
-Static marketing, documentation, and legal pages for Sinyx.
+Static company, product, service, documentation, and legal pages for Sinyx.
 
 ## Deployment
 
@@ -8,7 +8,7 @@ The website can be deployed as static files from this directory. Recommended hos
 
 For Vercel, deploy this directory as the project root. `vercel.json` enables clean URLs, security headers, asset caching, and redirects for `/terms` and `/api`.
 
-The source files intentionally remain plain `.html` files because this is a static site. Public links use clean routes such as `/docs`, `/pricing`, `/tos`, and `/privacy`; Vercel's `cleanUrls` setting maps those routes to the source files in production.
+The source files intentionally remain plain `.html` files because this is a static site. Public links use clean routes such as `/products`, `/services`, `/docs`, `/pricing`, `/tos`, and `/privacy`; Vercel's `cleanUrls` setting maps those routes to the source files in production.
 
 For local preview with production-style routes:
 

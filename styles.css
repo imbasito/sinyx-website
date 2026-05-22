@@ -92,6 +92,18 @@ img {
   color: var(--brand);
 }
 
+.text-link {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--brand-deep);
+}
+
 .nav-cta,
 .button {
   display: inline-flex;
@@ -415,6 +427,10 @@ code {
   align-items: start;
 }
 
+.footer-grid-wide {
+  grid-template-columns: 1fr auto auto auto;
+}
+
 .footer-logo {
   width: 150px;
 }
@@ -623,7 +639,8 @@ td {
   .split-section,
   .agent-grid,
   .pricing-grid,
-  .footer-grid {
+  .footer-grid,
+  .footer-grid-wide {
     grid-template-columns: 1fr;
   }
 

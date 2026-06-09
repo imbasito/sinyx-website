@@ -544,6 +544,47 @@ code {
   margin-top: 28px;
 }
 
+.plan-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.plan-price {
+  margin: 12px 0 4px;
+  color: var(--text-strong);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.plan-price-period {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.plan-grid article.featured {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand), 0 18px 42px rgba(15, 23, 40, 0.08);
+}
+
+.plan-includes {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan-includes li {
+  padding: 6px 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.plan-includes li::before {
+  content: "✓ ";
+  color: var(--success);
+  font-weight: 600;
+}
+
 .endpoint-row {
   display: flex;
   flex-wrap: wrap;
@@ -644,7 +685,8 @@ td {
     grid-template-columns: 1fr;
   }
 
-  .plan-grid {
+  .plan-grid,
+  .plan-grid-3 {
     grid-template-columns: 1fr;
   }
 
